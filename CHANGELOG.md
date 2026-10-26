@@ -26,8 +26,15 @@
 - Barba.js for page transitions.
 - Figma Code Connect and Style Dictionary integration for design-system workflows.
 
-### Known Limitations
-
+### Known Bugs
 - Lazy-loading behavior does not work as intended in all cases and needs further work.
 - Some mobile image sections currently scroll vertically; they need to be optimized for horizontal scrolling to reduce overall page length.
 - Google search console has been updated with the latest sitemap file but it still shows a "Couldn't fetch" error.
+- Show max of 3 testimonials on mobile.
+- Right align the "Back to Top" arrow with the copyright text.
+- Make the first hero section visible on the first scroll.
+- Add a white outline to the text so its visible on dark backgrounds.
+
+### Possible Upgrades
+- Add Spofity playlist and show soundwaves at the top while its playing
+- Add the rest of the sections like photography and graphic design.
