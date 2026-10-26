@@ -1,0 +1,14 @@
+{
+  "codeConnect": {
+    "include": [
+      "design-system/code-connect/button.figma.ts",
+      "design-system/code-connect/text-link.figma.ts",
+      "design-system/code-connect/read-only.figma.ts"
+    ],
+    "exclude": [
+      "node_modules/**"
+    ],
+    "label": "HTML",
+    "language": "html"
+  }
+}

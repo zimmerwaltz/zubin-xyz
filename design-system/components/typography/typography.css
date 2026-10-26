@@ -1,0 +1,103 @@
+/* Typography Component */
+
+/* Display Styles */
+.display-d3 {
+    font-size: 80px;
+    line-height: 120px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-family: 'Abril Fatface', serif;
+}
+
+.display-d4 {
+    font-size: 72px;
+    line-height: 80px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-family: 'Abril Fatface', serif;
+}
+
+/* Heading Styles */
+.heading-h5 {
+    font-size: 24px;
+    line-height: 40px;
+    font-weight: 400;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.heading-h6 {
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: 400;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Body Styles */
+.body-lg {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.body-md {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Caption Styles */
+.caption-lg {
+    font-size: 16px;
+    line-height: 18px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Font Weights */
+.font-regular {
+    font-weight: 400;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    .display-d3 {
+        font-size: 40px;
+        line-height: 60px;
+        letter-spacing: 0.5px;
+    }
+
+    .display-d4 {
+        font-size: 36px;
+        line-height: 40px;
+        letter-spacing: 0.5px;
+    }
+
+    .heading-h5 {
+        font-size: 20px;
+        line-height: 32px;
+    }
+
+    .heading-h6 {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .body-lg {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .body-md {
+        font-size: 14px;
+        line-height: 20px;
+    }
+}

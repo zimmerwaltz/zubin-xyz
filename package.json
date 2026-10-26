@@ -1,0 +1,35 @@
+{
+  "name": "zubin-charles-design-system",
+  "version": "1.0.0",
+  "description": "Zubin Charles design system with Figma Code Connect integration",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "connect:publish": "npx -y node@20 node_modules/@figma/code-connect/dist/cli.js connect publish -c figma.config.json",
+    "connect:check": "npx -y node@20 node_modules/@figma/code-connect/dist/cli.js connect parse -c figma.config.json",
+    "tokens:build": "style-dictionary build",
+    "tailwind:build": "tailwindcss -c tailwind.config.js -i ./src/styles/tailwind.css -o ./assets/css/tailwind.css --minify",
+    "tailwind:watch": "tailwindcss -c tailwind.config.js -i ./src/styles/tailwind.css -o ./assets/css/tailwind.css --watch",
+    "dev": "echo 'Static site - open index.html in browser'",
+    "build": "npm run tokens:build && npm run tailwind:build"
+  },
+  "dependencies": {
+    "@barba/core": "^2.10.3",
+    "style-dictionary": "^3.8.0"
+  },
+  "devDependencies": {
+    "@figma/code-connect": "^2.0.1",
+    "@types/node": "^20.0.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.17"
+  },
+  "keywords": [
+    "design-system",
+    "figma",
+    "code-connect",
+    "components"
+  ],
+  "author": "Zubin Charles",
+  "license": "MIT"
+}

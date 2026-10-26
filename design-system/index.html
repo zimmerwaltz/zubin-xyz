@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System - Zubin Charles</title>
+    <link rel="stylesheet" href="../assets/css/tailwind.css">
+    <link rel="stylesheet" href="../../../styles.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BVJSF0ZLMS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-BVJSF0ZLMS');
+    </script>
+    <style>
+        :root {
+            --system-spacing: 2rem;
+            --system-spacing-sm: 1rem;
+            --system-spacing-xs: 0.5rem;
+        }
+
+        .design-system-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--system-spacing);
+        }
+
+        .ds-header {
+            margin-bottom: 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--c-border-color-default-1);
+        }
+
+        .ds-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Abril Fatface', serif;
+        }
+
+        .ds-header p {
+            font-size: 1.125rem;
+            color: #666;
+        }
+
+        .ds-section {
+            margin-bottom: 4rem;
+        }
+
+        .ds-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--c-border-color-primary-default);
+        }
+
+        .ds-subsection {
+            margin-bottom: 2rem;
+        }
+
+        .ds-subsection h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .demo-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            margin: 1rem 0;
+        }
+
+        .demo-card {
+            border: 1px solid var(--c-border-color-default-1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            background: white;
+        }
+
+        .demo-card h4 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #666;
+        }
+
+        .button-demo {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .typography-demo {
+            background: var(--c-surface-color-default-light-2);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .color-swatch {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .color-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            border: 1px solid var(--c-border-color-default-1);
+        }
+
+        .color-info {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .color-name {
+            font-weight: 600;
+            min-width: 150px;
+        }
+
+        .color-value {
+            font-family: 'Courier New', monospace;
+            color: #666;
+        }
+
+        .spacing-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+        }
+
+        .spacing-item {
+            text-align: center;
+        }
+
+        .spacing-box {
+            background: var(--c-surface-color-default-light-2);
+            border: 1px solid var(--c-border-color-default-1);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .spacing-box.s-4 { height: 4px; }
+        .spacing-box.s-8 { height: 8px; }
+        .spacing-box.s-16 { height: 16px; }
+        .spacing-box.s-24 { height: 24px; }
+        .spacing-box.s-32 { height: 32px; }
+
+        .spacing-label {
+            font-size: 0.75rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        code {
+            background: var(--c-surface-color-default-light-2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+
+        .nav-sidebar {
+            position: sticky;
+            top: 0;
+            display: none;
+            background: white;
+            border-bottom: 1px solid var(--c-border-color-default-1);
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-sidebar.active {
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--c-text-color-default-0);
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.25rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            border-bottom-color: var(--c-border-color-primary-default);
+        }
+
+        @media (max-width: 768px) {
+            .design-system-container {
+                padding: 1rem;
+            }
+
+            .ds-header h1 {
+                font-size: 2rem;
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-demo {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body data-barba="wrapper">
+    <main data-barba="container" data-barba-namespace="design-system" tabindex="-1">
+    <div class="design-system-container">
+        <!-- Header -->
+        <div class="ds-header">
+            <h1>Design System</h1>
+            <p>Zubin Charles — Complete component library and design tokens</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-sidebar active">
+            <div class="nav-links">
+                <a href="#colors">Colors</a>
+                <a href="#typography">Typography</a>
+                <a href="#buttons">Buttons</a>
+                <a href="#spacing">Spacing</a>
+                <a href="#icons">Icons</a>
+            </div>
+        </div>
+
+        <!-- Colors Section -->
+        <section class="ds-section" id="colors">
+            <h2>Color System</h2>
+            
+            <div class="ds-subsection">
+                <h3>Surface Colors</h3>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #000000;"></div>
+                    <div class="color-info">
+                        <span class="color-name">Primary Black</span>
+                        <span class="color-value">#000000</span>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #ffffff; border: 2px solid #e6e6e6;"></div>
+                    <div class="color-info">
+                        <span class="color-name">White</span>
+                        <span class="color-value">#ffffff</span>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #f6f6f6;"></div>
+                    <div class="color-info">
+                        <span class="color-name">Light Gray</span>
+                        <span class="color-value">#f6f6f6</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ds-subsection">
+                <h3>Border & Divider Colors</h3>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #e6e6e6;"></div>
+                    <div class="color-info">
+                        <span class="color-name">Default Border</span>
+                        <span class="color-value">#e6e6e6</span>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #d9d9d9;"></div>
+                    <div class="color-info">
+                        <span class="color-name">Light Separator</span>
+                        <span class="color-value">#d9d9d9</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography Section -->
+        <section class="ds-section" id="typography">
+            <h2>Typography</h2>
+            
+            <div class="ds-subsection">
+                <h3>Display Styles</h3>
+                <div class="typography-demo">
+                    <h1 class="display-d3" style="margin: 0;">Display D3 - 80px</h1>
+                </div>
+                <p>Font: Abril Fatface, Line Height: 120px, Letter Spacing: 1px</p>
+            </div>
+
+            <div class="ds-subsection">
+                <h3>Heading Styles</h3>
+                <div class="typography-demo">
+                    <h2 class="heading-h5" style="margin: 0;">Heading H5 - 24px</h2>
+                </div>
+                <p>Font: Plus Jakarta Sans, Line Height: 40px</p>
+            </div>
+
+            <div class="ds-subsection">
+                <h3>Body Styles</h3>
+                <div class="typography-demo">
+                    <p class="body-lg">Body Large - 16px with comfortable reading line height of 24px</p>
+                </div>
+                <div class="typography-demo">
+                    <p class="body-md">Body Medium - 14px for secondary content and smaller text blocks</p>
+                </div>
+            </div>
+
+            <div class="ds-subsection">
+                <h3>Font Families</h3>
+                <code>Plus Jakarta Sans</code> — Primary font for UI and body text<br>
+                <code>Abril Fatface</code> — Display and heading font<br>
+                <code>Inter</code> — Mono font for code and captions
+            </div>
+        </section>
+
+        <!-- Buttons Section -->
+        <section class="ds-section" id="buttons">
+            <h2>Buttons</h2>
+            
+            <div class="ds-subsection">
+                <h3>Button Variants</h3>
+                <div class="button-demo">
+                    <a href="#" class="btn btn-primary">
+                        <span>Primary Button</span>
+                        <span class="btn-icon icon-mask icon-arrow-right" aria-hidden="true"></span>
+                    </a>
+                    <a href="#" class="btn btn-outline">
+                        <span>Outline Button</span>
+                        <span class="btn-icon icon-mask icon-arrow-right" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="ds-subsection">
+                <h3>Button Specifications</h3>
+                <ul>
+                    <li>Height: 56px</li>
+                    <li>Padding: 24px (horizontal)</li>
+                    <li>Border Radius: 4px</li>
+                    <li>Icon Spacing: 8px</li>
+                    <li>Transition: 0.3s ease</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Spacing Section -->
+        <section class="ds-section" id="spacing">
+            <h2>Spacing System</h2>
+            <p>Based on an 8px grid system for consistent and scalable spacing.</p>
+            
+            <div class="ds-subsection">
+                <h3>Spacing Scale</h3>
+                <div class="spacing-demo">
+                    <div class="spacing-item">
+                        <div class="spacing-box s-4"></div>
+                        <span class="spacing-label">4px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box s-8"></div>
+                        <span class="spacing-label">8px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box s-16"></div>
+                        <span class="spacing-label">16px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box s-24"></div>
+                        <span class="spacing-label">24px</span>
+                    </div>
+                    <div class="spacing-item">
+                        <div class="spacing-box s-32"></div>
+                        <span class="spacing-label">32px</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ds-subsection">
+                <h3>Jumper Scale</h3>
+                <p>Large scale spacing for sections and major layout components:</p>
+                <ul>
+                    <li><code>--r-jumper-xs-xs: 16px</code></li>
+                    <li><code>--r-jumper-sm-sm: 24px</code></li>
+                    <li><code>--r-jumper-lg-sm: 48px</code></li>
+                    <li><code>--r-jumper-xl-md: 64px</code></li>
+                    <li><code>--r-jumper-3xl-md: 120px</code></li>
+                    <li><code>--r-jumper-4xl-md: 160px</code></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Icons Section -->
+        <section class="ds-section" id="icons">
+            <h2>Icon System</h2>
+            
+            <div class="ds-subsection">
+                <h3>Icon Sizes</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4>Extra Small (16px)</h4>
+                        <span class="icon-mask icon-arrow-right icon-xs" aria-hidden="true"></span>
+                    </div>
+                    <div class="demo-card">
+                        <h4>Small (20px)</h4>
+                        <span class="icon-mask icon-arrow-right icon-sm" aria-hidden="true"></span>
+                    </div>
+                    <div class="demo-card">
+                        <h4>Medium (24px)</h4>
+                        <span class="icon-mask icon-arrow-right icon-md" aria-hidden="true"></span>
+                    </div>
+                    <div class="demo-card">
+                        <h4>Large (40px)</h4>
+                        <span class="icon-mask icon-arrow-right icon-lg" aria-hidden="true"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ds-subsection">
+                <h3>Icon Usage</h3>
+                <p>All icons should use asset-backed classes with <code>.icon-mask</code> and include <code>aria-hidden="true"</code> when decorative.</p>
+                <code>
+                    &lt;span class="btn-icon icon-mask icon-arrow-right" aria-hidden="true"&gt;&lt;/span&gt;
+                </code>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--c-border-color-default-1); text-align: center; color: #666;">
+            <p>Design System v1.0 • Last Updated: March 2026</p>
+            <p><a href="../../tokens.json" style="color: inherit;">View Design Tokens (JSON)</a></p>
+        </div>
+    </div>
+    </main>
+    <script src="../node_modules/@barba/core/dist/barba.umd.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>

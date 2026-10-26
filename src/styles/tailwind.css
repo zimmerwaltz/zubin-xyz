@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-text;
+  }
+}
+
+@layer components {
+  .ui-navbar {
+    @apply flex items-center justify-between gap-md bg-background px-lg py-md;
+  }
+
+  .ui-button {
+    @apply inline-flex items-center justify-center gap-sm rounded-md px-md py-sm text-md font-medium transition-colors;
+  }
+
+  .ui-button-primary {
+    @apply bg-primary text-background;
+  }
+
+  .ui-button-secondary {
+    @apply bg-secondary text-background;
+  }
+
+  .ui-card {
+    @apply grid gap-md rounded-lg bg-background p-lg shadow-sm;
+  }
+}
