@@ -27,7 +27,7 @@ Your design system now has full Figma Code Connect integration installed and con
 ## System Structure
 
 ```
-zubin_website_github_copilot/
+zubin-xyz/
 ├── 📦 package.json                           (Installed ✅)
 ├── 🔧 figma.config.ts                        (Configuration)
 ├── 📄 .env.example                           (Template)
