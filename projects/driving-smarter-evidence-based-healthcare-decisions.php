@@ -28,7 +28,96 @@
             <?php include "../include/header.php"; ?>
         </header>
 
-        <section class="home-section project-case-hero" id="hero" aria-label="Project overview">
+        <nav class="project-chapter-navigation" data-project-chapter-navigation aria-label="Case study chapters">
+            <div class="project-chapter-navigation__menu" id="project-chapter-navigation-menu" hidden>
+                <ol class="project-chapter-navigation__list">
+                    <li>
+                        <a href="#hero" data-project-chapter-link aria-current="location">
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Project overview</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#the-process" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>The process</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#problem-statement" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Problem statement</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#challenges" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Challenges</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#visual-designs" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Visual designs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#user-testimonials" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>User testimonials</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#impact" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>The impact</span>
+                        </a>
+                    </li>
+                </ol>
+            </div>
+            <div class="project-chapter-navigation__controls">
+                <button
+                    class="project-chapter-navigation__current"
+                    type="button"
+                    aria-label="Open project chapters"
+                    aria-expanded="false"
+                    aria-controls="project-chapter-navigation-menu"
+                >
+                    <img src="../assets/icons/project-chapter-list.svg" alt="" aria-hidden="true" width="16" height="16">
+                    <span class="project-chapter-navigation__current-label">Project overview</span>
+                    <span
+                        class="project-chapter-navigation__progress"
+                        role="progressbar"
+                        aria-label="Project reading progress"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                        aria-valuetext="0% of case study"
+                    >
+                        <span class="project-chapter-navigation__progress-fill"></span>
+                    </span>
+                </button>
+                <button class="project-chapter-navigation__top" type="button" aria-label="Back to top">
+                    <span class="icon-mask icon-chevron-up" aria-hidden="true"></span>
+                </button>
+            </div>
+        </nav>
+
+        <section class="home-section project-case-hero" id="hero" data-project-chapter aria-label="Project overview">
             <div class="home-shell project-case-hero-shell">
                 <div class="project-case-top-actions">
                     <a href="../product_design.php" class="btn btn-outline">
@@ -36,13 +125,15 @@
                         <span>All Projects</span>
                     </a>
                     <div class="project-case-project-nav">
-                        <div class="project-case-nav-control" data-tooltip="Previous Project">
-                            <a href="<?php echo htmlspecialchars($previous_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button" aria-label="<?php echo htmlspecialchars('Previous project: ' . $previous_project_name, ENT_QUOTES, 'UTF-8'); ?>">
+                        <div class="project-case-nav-control">
+                            <a href="<?php echo htmlspecialchars($previous_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button project-case-labeled-button" aria-label="<?php echo htmlspecialchars('Previous project: ' . $previous_project_name, ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="btn-icon icon-mask icon-chevron-left" aria-hidden="true"></span>
+                                <span class="project-case-button-label">Prev</span>
                             </a>
                         </div>
-                        <div class="project-case-nav-control" data-tooltip="Next Project">
-                            <a href="<?php echo htmlspecialchars($next_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button" aria-label="<?php echo htmlspecialchars('Next project: ' . $next_project_name, ENT_QUOTES, 'UTF-8'); ?>">
+                        <div class="project-case-nav-control">
+                            <a href="<?php echo htmlspecialchars($next_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button project-case-labeled-button" aria-label="<?php echo htmlspecialchars('Next project: ' . $next_project_name, ENT_QUOTES, 'UTF-8'); ?>">
+                                <span class="project-case-button-label">Next</span>
                                 <span class="btn-icon icon-mask icon-chevron-right" aria-hidden="true"></span>
                             </a>
                         </div>
@@ -52,7 +143,7 @@
                 <div class="project-case-hero-copy">
                     <h1 class="page-title">Driving smarter evidence based healthcare decisions.</h1>
                     <div class="project-case-cover">
-                        <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/project-cover.png" alt="Mobile-first biomarker decision support experience showcased on device">
+                        <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/project-cover.png" alt="Mobile-first biomarker decision support experience showcased on device" width="2400" height="1280" loading="eager" fetchpriority="high">
                     </div>
                 </div>
 
@@ -89,7 +180,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-process" aria-label="Design process">
+        <section class="home-section project-case-process" id="the-process" data-project-chapter aria-label="Design process">
             <div class="home-shell project-case-process-shell">
                 <div class="project-case-process-graphic" aria-hidden="true">
                     <?php include "../assets/images/process.svg"; ?>
@@ -125,20 +216,20 @@
             </div>
         </section>
 
-        <section class="home-section project-case-problem" aria-label="Problem statement">
+        <section class="home-section project-case-problem project-case-dark" id="problem-statement" data-project-chapter aria-label="Problem statement">
             <div class="home-shell project-case-problem-shell">
                 <div class="project-case-problem-intro">
                     <div class="project-case-problem-graphic">
                         <?php include "../assets/images/problem-statement.svg"; ?>
                     </div>
-                    <div class="project-section-copy copy-left copy-light">
+                    <div class="project-section-copy copy-left copy-dark">
                         <h2>Problem statement</h2>
                         <p>Healthcare professionals often struggle to <b><i>interpret specialised biomarker</i></b> test results due to a lack of accessible, credible, and clinically relevant digital resources which affects their ability to confidently diagnose and prescribe treatments, ultimately limiting the adoption of the biomarker test.</p>
                     </div>
                 </div>
                 <div class="project-case-problem-user">
                     <div class="project-case-problem-user-media">
-                        <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/problem-visual.jpg" alt="Healthcare practitioner reviewing patient data">
+                        <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/problem-visual.jpg" alt="Healthcare practitioner reviewing patient data" width="1200" height="770" loading="lazy">
                     </div>
                     <aside class="project-case-problem-user-quote">
                         <p>“As a healthcare professional, I want quick, reliable information to guide my patients with the right treatment”</p>
@@ -147,7 +238,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-challenges" aria-label="Challenges">
+        <section class="home-section project-case-challenges" id="challenges" data-project-chapter aria-label="Challenges">
             <div class="home-shell project-case-challenges-shell">
                 <div class="project-case-challenge-art" aria-hidden="true">
                     <?php include "../assets/images/challenges.svg"; ?>
@@ -169,21 +260,21 @@
             </div>
         </section>
 
-        <section class="home-section project-case-dark project-case-visual-designs" aria-label="Visual designs">
+        <section class="home-section project-case-dark project-case-visual-designs" id="visual-designs" data-project-chapter aria-label="Visual designs">
             <div class="home-shell project-case-visual-shell">
                  <div class="project-section-copy copy-left copy-light">
                     <h2>Visual Designs</h2>
                     <p>A glimpse into some of the key screens.</p>
                 </div>
                 <div class="project-case-visual-main">
-                    <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/visual-design-main.png" alt="Primary application keyscreen">
+                    <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/visual-design-main.png" alt="Primary application keyscreen" width="1767" height="1651" loading="lazy">
                 </div>
             </div>
         </section>
 
         <section class="home-section project-case-duo" aria-label="Biomarker interpretation screens">
             <div class="project-case-section-header">
-                <img class="project-case-app-logo" src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/app-logo.png" alt="Biomarker decision support app logo">
+                <img class="project-case-app-logo" src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/app-logo.png" alt="Biomarker decision support app logo" width="190" height="190" loading="lazy">
                 <h2 class="project-case-sans-heading">Biomarker Test Result Interpretation</h2>
             </div>
             <div class="project-case-duo-screens">
@@ -191,7 +282,7 @@
                     <div class="project-case-duo-inner">
                         <div class="project-case-screen-card">
                             <p class="type-body-lg-regular">Quick access to initiate test interpretation.</p>
-                            <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/biomarker-screen-1.png" alt="Screen showing biomarker interpretation start point">
+                            <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/biomarker-screen-1.png" alt="Screen showing biomarker interpretation start point" width="1680" height="3358" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -199,7 +290,7 @@
                     <div class="project-case-duo-inner">
                         <div class="project-case-screen-card">
                             <p class="type-body-lg-regular">Upload a report to begin or access saved reports.</p>
-                            <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/biomarker-screen-2.png" alt="Screen for uploading reports and saved report access">
+                            <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/biomarker-screen-2.png" alt="Screen for uploading reports and saved report access" width="1238" height="2400" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -208,28 +299,28 @@
 
         <section class="home-section project-case-breakdown" aria-label="Visual breakdown of test results">
             <div class="project-case-section-header">
-                <img class="project-case-app-logo" src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/nucleous-orbit.svg" alt="Biomarker decision support app logo">
+                <img class="project-case-app-logo" src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/nucleous-orbit.svg" alt="Biomarker decision support app logo" width="272" height="233" loading="lazy">
                 <h2 class="project-case-sans-heading">Visual breakdown of Test Results</h2>
             </div>
             <div class="home-shell project-case-breakdown-shell">
                 <div class="project-case-breakdown-grid">
                     <article class="project-case-breakdown-item">
-                        <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/breakdown-1.png" alt="Visual breakdown of biomarker levels in app">
+                        <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/breakdown-1.png" alt="Visual breakdown of biomarker levels in app" width="1472" height="2854" loading="lazy">
                         <p class="type-body-lg-regular">Visual breakdown of biomarker levels.</p>
                     </article>
                     <article class="project-case-breakdown-item project-case-breakdown-item-mid">
-                        <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/breakdown-2.png" alt="Screen linking biomarker results to clinical guidelines">
+                        <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/breakdown-2.png" alt="Screen linking biomarker results to clinical guidelines" width="1472" height="2854" loading="lazy">
                         <p class="type-body-lg-regular">Linked to clinical guidelines and studies.</p>
                     </article>
                     <article class="project-case-breakdown-item project-case-breakdown-item-low">
-                        <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/breakdown-3.png" alt="Screen showing evidence-based treatment options">
+                        <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/breakdown-3.png" alt="Screen showing evidence-based treatment options" width="1472" height="2854" loading="lazy">
                         <p class="type-body-lg-regular">Evidence-based treatment options.</p>
                     </article>
                 </div>
             </div>
         </section>
 
-        <section class="home-section project-case-testimonials" aria-label="User testimonials">
+        <section class="home-section project-case-testimonials" id="user-testimonials" data-project-chapter aria-label="User testimonials">
             <div class="home-shell project-case-testimonials-shell">
                 <div class="project-case-testimonials-header project-section-copy copy-light">
                     <h2>What users have to say?</h2>
@@ -238,7 +329,7 @@
                 <div class="project-case-testimonials-grid">
                     <article class="project-case-testimonial">
                         <p class="project-case-testimonial-quote">The app has been a huge success and is a great addition to a clinician digital resources. It compliments the existing procalcitonin.com website and training portal by adding in-depth clinical guidance at the physicians fingertips.</p>
-                        <div class="project-case-testimonial-notch" aria-hidden="true"><img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/figma-testimonial-notch-1.svg" alt=""></div>
+                        <div class="project-case-testimonial-notch" aria-hidden="true"><img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/figma-testimonial-notch-1.svg" alt="" width="368" height="37" loading="lazy"></div>
                         <div class="project-case-testimonial-author">
                             <p>PCT Regional Marketing Manager</p>
                             <span>North America Region</span>
@@ -246,7 +337,7 @@
                     </article>
                     <article class="project-case-testimonial">
                         <p class="project-case-testimonial-quote">I would like to briefly share our very positive experience with the PCT app. I consider it very practical, intuitive and clinically relevant. We consider the app to be a very valuable resource to support the initiatives that we are working together.</p>
-                        <div class="project-case-testimonial-notch" aria-hidden="true"><img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/figma-testimonial-notch-1.svg" alt=""></div>
+                        <div class="project-case-testimonial-notch" aria-hidden="true"><img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/figma-testimonial-notch-1.svg" alt="" width="368" height="37" loading="lazy"></div>
                         <div class="project-case-testimonial-author">
                             <p>Medical Affairs Latin America</p>
                             <span>Siemens Healthineers</span>
@@ -254,7 +345,7 @@
                     </article>
                     <article class="project-case-testimonial">
                         <p class="project-case-testimonial-quote">The PCT app has become an integral part of a customer conversations. It is an ideal compliment to our clinical trainings and effectively supports our clinical demand activities</p>
-                        <div class="project-case-testimonial-notch" aria-hidden="true"><img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/figma-testimonial-notch-1.svg" alt=""></div>
+                        <div class="project-case-testimonial-notch" aria-hidden="true"><img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/figma-testimonial-notch-1.svg" alt="" width="368" height="37" loading="lazy"></div>
                         <div class="project-case-testimonial-author">
                             <p>Senior Manager</p>
                             <span>Clinical Customer Development and Regional Lead</span>
@@ -262,7 +353,7 @@
                     </article>
                     <article class="project-case-testimonial">
                         <p class="project-case-testimonial-quote">The PCT app is a strategic digital solution that enhances the value of the proton test in daily clinical practice designed as a high impact educational tool. It facilitates the understanding and proper use of PCT.</p>
-                        <div class="project-case-testimonial-notch" aria-hidden="true"><img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/figma-testimonial-notch-1.svg" alt=""></div>
+                        <div class="project-case-testimonial-notch" aria-hidden="true"><img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/figma-testimonial-notch-1.svg" alt="" width="368" height="37" loading="lazy"></div>
                         <div class="project-case-testimonial-author">
                             <p>Product Manager Andean Region</p>
                             <span>Siemens Healthineers</span>
@@ -270,24 +361,24 @@
                     </article>
                     <article class="project-case-testimonial">
                         <p class="project-case-testimonial-quote">The app has become a valuable resource for a US license partners when engaging with their clinical customers, feedback consistently highlights its concise user friendly format</p>
-                        <div class="project-case-testimonial-notch" aria-hidden="true"><img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/figma-testimonial-notch-1.svg" alt=""></div>
+                        <div class="project-case-testimonial-notch" aria-hidden="true"><img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/figma-testimonial-notch-1.svg" alt="" width="368" height="37" loading="lazy"></div>
                         <div class="project-case-testimonial-author">
                             <p>NORAM License Partner Manager</p>
                             <span>PCT</span>
                         </div>
                     </article>
                     <button class="project-case-testimonial-mark" type="button" aria-expanded="false" aria-label="Show more testimonials">
-                        <img src="../assets/images/quote.svg" alt="">
+                        <img src="../assets/images/quote.svg" alt="" width="64" height="48" loading="lazy">
                         <span class="icon-mask icon-chevron-down" aria-hidden="true"></span>
                     </button>
                 </div>
             </div>
         </section>
 
-        <section class="home-section project-case-dark project-case-impact" aria-label="The impact">
+        <section class="home-section project-case-dark project-case-impact" id="impact" data-project-chapter data-project-chapter-end aria-label="The impact">
             <div class="home-shell project-case-impact-shell">
                 <div class="project-case-impact-device">
-                    <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/the-impact.png" alt="Device composition presenting key experience visuals">
+                    <img src="../assets/images/driving-smarter-evidence-based-healthcare-decisions/the-impact.png" alt="Device composition presenting key experience visuals" width="2400" height="1960" loading="lazy">
                 </div>
                 <div class="home-section-header-copy project-case-intro-copy project-case-impact-copy">
                     <h2>The impact</h2>

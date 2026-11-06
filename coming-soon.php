@@ -31,7 +31,7 @@
             display: block;
         }
 
-        .coming-soon-logo {
+        .logo-circular {
             width: 120px;
             height: 120px;
             flex-shrink: 0;
@@ -133,7 +133,7 @@
                 line-height: 1;
             }
 
-            .coming-soon-logo {
+            .logo-circular {
                 width: 88px;
                 height: 88px;
             }

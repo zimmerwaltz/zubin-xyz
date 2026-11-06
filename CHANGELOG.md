@@ -27,14 +27,25 @@
 - Figma Code Connect and Style Dictionary integration for design-system workflows.
 
 ### Known Bugs
-- Lazy-loading behavior does not work as intended in all cases and needs further work.
 - Some mobile image sections currently scroll vertically; they need to be optimized for horizontal scrolling to reduce overall page length.
 - Google search console has been updated with the latest sitemap file but it still shows a "Couldn't fetch" error.
+
+
+### Bugs Fixed
+- Lazy-loading behavior does not work as intended in all cases and needs further work.
 - Show max of 3 testimonials on mobile.
 - Right align the "Back to Top" arrow with the copyright text.
 - Make the first hero section visible on the first scroll.
-- Add a white outline to the text so its visible on dark backgrounds.
+- Video loading failure fixed on field service agent case study page.
+
 
 ### Possible Upgrades
-- Add Spofity playlist and show soundwaves at the top while its playing
+- Add Spofity playlist and show soundwaves at the top while its playing.
 - Add the rest of the sections like photography and graphic design.
+- Update google search results text through meta description update on the index.php page
+- Update testimonials to show one at a time and a cirlce showing initials of the person with a circluar timeout outline around it which completes and moves to the next testimonial. 
+
+### Upgrades Completed
+- Add mini youtube like chapters so that the user can directly scroll to that section. 
+- Add subtle vignette to the bottom of the viewport.
+- Home Product Design images layout optimised for tablet and mobile.

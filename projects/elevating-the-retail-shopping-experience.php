@@ -28,7 +28,136 @@
             <?php include "../include/header.php"; ?>
         </header>
 
-        <section class="home-section project-case-hero" id="hero" aria-label="Project overview">
+        <nav class="project-chapter-navigation" data-project-chapter-navigation aria-label="Case study chapters">
+            <div class="project-chapter-navigation__menu" id="project-chapter-navigation-menu" hidden>
+                <ol class="project-chapter-navigation__list">
+                    <li>
+                        <a href="#hero" data-project-chapter-link aria-current="location">
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Project overview</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#the-process" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>The process</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#the-challenge" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>The challenge</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#workshop" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Workshop</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#personas" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Personas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#wireframes" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Wireframes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#visual-designs" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Visual designs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#onboarding" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Onboarding</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#discovery" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Better discovery</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#retail-showcases" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Retail screen showcases</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#loyalty" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>First Citizen loyalty</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#personalised-experience" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Personalised experience</span>
+                        </a>
+                    </li>
+                </ol>
+            </div>
+            <div class="project-chapter-navigation__controls">
+                <button
+                    class="project-chapter-navigation__current"
+                    type="button"
+                    aria-label="Open project chapters"
+                    aria-expanded="false"
+                    aria-controls="project-chapter-navigation-menu"
+                >
+                    <img src="../assets/icons/project-chapter-list.svg" alt="" aria-hidden="true" width="16" height="16">
+                    <span class="project-chapter-navigation__current-label">Project overview</span>
+                    <span
+                        class="project-chapter-navigation__progress"
+                        role="progressbar"
+                        aria-label="Project reading progress"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                        aria-valuetext="0% of case study"
+                    >
+                        <span class="project-chapter-navigation__progress-fill"></span>
+                    </span>
+                </button>
+                <button class="project-chapter-navigation__top" type="button" aria-label="Back to top">
+                    <span class="icon-mask icon-chevron-up" aria-hidden="true"></span>
+                </button>
+            </div>
+        </nav>
+
+        <section class="home-section project-case-hero" id="hero" data-project-chapter aria-label="Project overview">
             <div class="home-shell project-case-hero-shell">
                 <div class="project-case-top-actions">
                     <a href="../product_design.php" class="btn btn-outline">
@@ -36,13 +165,15 @@
                         <span>All Projects</span>
                     </a>
                     <div class="project-case-project-nav">
-                        <div class="project-case-nav-control" data-tooltip="Previous Project">
-                            <a href="<?php echo htmlspecialchars($previous_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button" aria-label="<?php echo htmlspecialchars('Previous project: ' . $previous_project_name, ENT_QUOTES, 'UTF-8'); ?>">
+                        <div class="project-case-nav-control">
+                            <a href="<?php echo htmlspecialchars($previous_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button project-case-labeled-button" aria-label="<?php echo htmlspecialchars('Previous project: ' . $previous_project_name, ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="btn-icon icon-mask icon-chevron-left" aria-hidden="true"></span>
+                                <span class="project-case-button-label">Prev</span>
                             </a>
                         </div>
-                        <div class="project-case-nav-control" data-tooltip="Next Project">
-                            <a href="<?php echo htmlspecialchars($next_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button" aria-label="<?php echo htmlspecialchars('Next project: ' . $next_project_name, ENT_QUOTES, 'UTF-8'); ?>">
+                        <div class="project-case-nav-control">
+                            <a href="<?php echo htmlspecialchars($next_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button project-case-labeled-button" aria-label="<?php echo htmlspecialchars('Next project: ' . $next_project_name, ENT_QUOTES, 'UTF-8'); ?>">
+                                <span class="project-case-button-label">Next</span>
                                 <span class="btn-icon icon-mask icon-chevron-right" aria-hidden="true"></span>
                             </a>
                         </div>
@@ -52,7 +183,7 @@
                 <div class="project-case-hero-copy">
                     <h1 class="page-title">Elevating the retail shopping experience.</h1>
                     <div class="project-case-cover">
-                        <img src="../assets/images/elevating-the-retail-shopping-experience/project-cover.png" alt="E-commerce shopping experience showcased across four mobile devices">
+                        <img src="../assets/images/elevating-the-retail-shopping-experience/project-cover.png" alt="E-commerce shopping experience showcased across four mobile devices" width="2400" height="1280" loading="eager" fetchpriority="high">
                     </div>
                 </div>
 
@@ -89,7 +220,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-process" aria-label="Desig n process">
+        <section class="home-section project-case-process" id="the-process" data-project-chapter aria-label="Desig n process">
             <div class="home-shell project-case-process-shell">
                 <div class="project-case-process-graphic" aria-hidden="true">
                     <?php include "../assets/images/process-four-leaf.svg"; ?>
@@ -132,7 +263,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-problem project-case-dark" aria-label="Problem statement">
+        <section class="home-section project-case-problem project-case-dark" id="the-challenge" data-project-chapter aria-label="Problem statement">
             <div class="home-shell project-case-problem-shell">
                 <div class="project-case-problem-intro">
                     <div class="project-case-problem-graphic" aria-hidden="true">
@@ -146,7 +277,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-workshop" aria-label="Workshop">
+        <section class="home-section project-case-workshop" id="workshop" data-project-chapter aria-label="Workshop">
             <div class="home-shell project-case-workshop-shell">
                 <h2 class="project-case-workshop-title">Workshop</h2>
                 <div class="project-case-workshop-day">
@@ -159,16 +290,16 @@
                     </div>
                     <div class="project-case-workshop-images">
                         <figure>
-                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-01-01.png" alt="Product intent and vision workshop board with six experience goals">
+                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-01-01.png" alt="Product intent and vision workshop board with six experience goals" width="2304" height="1612" loading="lazy">
                         </figure>
                         <figure>
-                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-01-02.png" alt="Workshop affinity map grouping customer opportunities and experience ideas">
+                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-01-02.png" alt="Workshop affinity map grouping customer opportunities and experience ideas" width="2304" height="1612" loading="lazy">
                         </figure>
                         <figure>
-                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-01-03.png" alt="Brand perception map of desired shopping experience attributes">
+                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-01-03.png" alt="Brand perception map of desired shopping experience attributes" width="2304" height="1360" loading="lazy">
                         </figure>
                         <figure>
-                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-01-04.png" alt="Customer says, thinks, does, and feels empathy map">
+                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-01-04.png" alt="Customer says, thinks, does, and feels empathy map" width="2304" height="1360" loading="lazy">
                         </figure>
                     </div>
                 </div>
@@ -182,13 +313,13 @@
                     </div>
                     <div class="project-case-workshop-images project-case-workshop-images-three">
                         <figure>
-                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-02-01.png" alt="Workshop findings highlighting incomplete product information on product detail pages">
+                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-02-01.png" alt="Workshop findings highlighting incomplete product information on product detail pages" width="1472" height="1023" loading="lazy">
                         </figure>
                         <figure>
-                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-02-02.png" alt="Workshop boards covering the loyalty program and brand proposition">
+                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-02-02.png" alt="Workshop boards covering the loyalty program and brand proposition" width="1472" height="1023" loading="lazy">
                         </figure>
                         <figure>
-                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-02-03.png" alt="Sailboat framework mapping workshop strengths, weaknesses, and opportunities">
+                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-02-03.png" alt="Sailboat framework mapping workshop strengths, weaknesses, and opportunities" width="1472" height="1023" loading="lazy">
                         </figure>
                     </div>
                 </div>
@@ -202,10 +333,10 @@
                     </div>
                     <div class="project-case-workshop-images">
                         <figure>
-                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-03-01.png" alt="Competitor benchmarking across fashion and retail brands">
+                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-03-01.png" alt="Competitor benchmarking across fashion and retail brands" width="2304" height="1542" loading="lazy">
                         </figure>
                         <figure>
-                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-03-02.png" alt="Brainstorming workshop board with how-might-we ideas">
+                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-03-02.png" alt="Brainstorming workshop board with how-might-we ideas" width="2304" height="1544" loading="lazy">
                         </figure>
                     </div>
                 </div>
@@ -219,14 +350,14 @@
                     </div>
                     <div class="project-case-workshop-images project-case-workshop-images-single">
                         <figure>
-                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-04-01.png" alt="Feature prioritization matrix plotting proposed retail features by impact and effort">
+                            <img src="../assets/images/elevating-the-retail-shopping-experience/day-04-01.png" alt="Feature prioritization matrix plotting proposed retail features by impact and effort" width="4800" height="3765" loading="lazy">
                         </figure>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="home-section project-case-personas" aria-labelledby="project-case-personas-title">
+        <section class="home-section project-case-personas" id="personas" data-project-chapter aria-labelledby="project-case-personas-title">
             <div class="home-shell project-case-personas-shell">
                 <div class="project-case-personas-header">
                     <h2 class="project-case-personas-title" id="project-case-personas-title">Personas</h2>
@@ -299,6 +430,8 @@
                                 class="project-case-persona-image"
                                 src="../assets/images/elevating-the-retail-shopping-experience/<?= htmlspecialchars($persona["image"], ENT_QUOTES, "UTF-8") ?>"
                                 alt="<?= htmlspecialchars($persona["alt"], ENT_QUOTES, "UTF-8") ?>"
+                                width="1176"
+                                height="755"
                                 loading="lazy"
                             >
                             <div class="project-case-persona-details">
@@ -316,7 +449,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-wireframes" aria-labelledby="project-case-wireframes-title">
+        <section class="home-section project-case-wireframes" id="wireframes" data-project-chapter aria-labelledby="project-case-wireframes-title">
             <div class="home-shell project-case-wireframes-shell">
                 <div class="project-case-wireframes-header">
                     <h2 class="project-case-wireframes-title" id="project-case-wireframes-title">Wireframes</h2>
@@ -336,19 +469,19 @@
             </div>
         </section>
 
-        <section class="home-section project-case-dark project-case-visual-designs" aria-label="Visual designs">
+        <section class="home-section project-case-dark project-case-visual-designs" id="visual-designs" data-project-chapter aria-label="Visual designs">
             <div class="home-shell project-case-visual-shell">
                 <div class="project-section-copy copy-left copy-light">
                     <h2>Visual Designs</h2>
                     <p>A glimpse into some of the key screens.</p>
                 </div>
                 <div class="project-case-visual-main">
-                    <img src="../assets/images/elevating-the-retail-shopping-experience/visual-design-main.png" alt="Key screens from the retail shopping experience app">
+                    <img src="../assets/images/elevating-the-retail-shopping-experience/visual-design-main.png" alt="Key screens from the retail shopping experience app" width="1176" height="1137" loading="lazy">
                 </div>
             </div>
         </section>
 
-        <section class="home-section project-case-onboarding" aria-labelledby="project-case-onboarding-title">
+        <section class="home-section project-case-onboarding" id="onboarding" data-project-chapter aria-labelledby="project-case-onboarding-title">
             <div class="home-shell project-case-onboarding-shell">
                 <div class="project-case-onboarding-header">
                     <h2 class="project-case-onboarding-title" id="project-case-onboarding-title">Onboarding for the masses</h2>
@@ -388,7 +521,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-segregation" aria-labelledby="project-case-segregation-title">
+        <section class="home-section project-case-segregation" id="discovery" data-project-chapter aria-labelledby="project-case-segregation-title">
             <div class="home-shell project-case-segregation-shell">
                 <figure class="project-case-segregation-art">
                     <img
@@ -406,7 +539,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-key-screens" aria-label="Retail screen showcases">
+        <section class="home-section project-case-key-screens" id="retail-showcases" data-project-chapter aria-label="Retail screen showcases">
             <div class="home-shell project-case-key-screens-shell">
                 <article class="project-case-key-screen-card project-case-key-screen-card-featured" aria-labelledby="project-case-key-screen-luxe-title">
                     <img
@@ -503,7 +636,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-loyalty" aria-labelledby="project-case-loyalty-title">
+        <section class="home-section project-case-loyalty" id="loyalty" data-project-chapter aria-labelledby="project-case-loyalty-title">
             <div class="home-shell project-case-loyalty-shell">
                 <header class="project-case-loyalty-header">
                     <div class="project-case-loyalty-intro">
@@ -515,11 +648,11 @@
                         </p>
                     </div>
                     <ul class="project-case-loyalty-tiers" aria-label="First Citizen membership tiers">
-                        <li><img src="../assets/images/elevating-the-retail-shopping-experience/crown-gold.svg" alt="Gold loyalty tier" width="52" height="52"></li>
-                        <li><img src="../assets/images/elevating-the-retail-shopping-experience/crown-black.svg" alt="Black loyalty tier" width="52" height="52"></li>
-                        <li><img src="../assets/images/elevating-the-retail-shopping-experience/crown-platinum.svg" alt="Platinum loyalty tier" width="52" height="52"></li>
-                        <li><img src="../assets/images/elevating-the-retail-shopping-experience/crown-silver.svg" alt="Silver loyalty tier" width="52" height="52"></li>
-                        <li><img src="../assets/images/elevating-the-retail-shopping-experience/crown-blue.svg" alt="Blue loyalty tier" width="52" height="52"></li>
+                        <li><img src="../assets/images/elevating-the-retail-shopping-experience/crown-gold.svg" alt="Gold loyalty tier" width="52" height="52" loading="lazy"></li>
+                        <li><img src="../assets/images/elevating-the-retail-shopping-experience/crown-black.svg" alt="Black loyalty tier" width="52" height="52" loading="lazy"></li>
+                        <li><img src="../assets/images/elevating-the-retail-shopping-experience/crown-platinum.svg" alt="Platinum loyalty tier" width="52" height="52" loading="lazy"></li>
+                        <li><img src="../assets/images/elevating-the-retail-shopping-experience/crown-silver.svg" alt="Silver loyalty tier" width="52" height="52" loading="lazy"></li>
+                        <li><img src="../assets/images/elevating-the-retail-shopping-experience/crown-blue.svg" alt="Blue loyalty tier" width="52" height="52" loading="lazy"></li>
                     </ul>
                 </header>
                 <div class="project-case-loyalty-features">
@@ -583,7 +716,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-mobile-gallery" aria-labelledby="project-case-mobile-gallery-title">
+        <section class="home-section project-case-mobile-gallery" id="personalised-experience" data-project-chapter data-project-chapter-end aria-labelledby="project-case-mobile-gallery-title">
             <div class="home-shell project-case-mobile-gallery-shell">
                 <header class="project-case-mobile-gallery-header">
                     <h2 class="project-case-mobile-gallery-title" id="project-case-mobile-gallery-title">

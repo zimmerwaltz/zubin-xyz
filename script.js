@@ -7,6 +7,15 @@ let hasInitializedBarba = false;
 let hasBoundCustomCursor = false;
 let hasBoundTestimonialToggleBreakpoint = false;
 let activePageLoadProgress = null;
+let headerContrastFrame = 0;
+const projectChapterNavigationControllers = new WeakMap();
+const lazyImagePreloadObservers = new WeakMap();
+const LAZY_IMAGE_PRELOAD_SELECTOR = '[data-barba="container"]';
+
+const DARK_BACKGROUND_LUMINANCE_THRESHOLD = 0.179;
+const IMAGE_SAMPLE_SIZE = 64;
+const imageSampleCanvases = new WeakMap();
+const warnedImageSampling = new WeakSet();
 
 /* ========================
    Ripple Effect
@@ -70,6 +79,286 @@ function updateActiveNavOnScroll() {
     });
 }
 
+function parseCssColor(color) {
+    const rgbMatch = color.match(/^rgba?\((.+)\)$/i);
+    if (rgbMatch) {
+        const components = rgbMatch[1].match(/[-+]?(?:\d*\.)?\d+%?/g);
+        if (!components || components.length < 3) {
+            return null;
+        }
+
+        const parseChannel = (value) => {
+            const parsed = Number.parseFloat(value);
+            return value.endsWith('%') ? parsed * 2.55 : parsed;
+        };
+        const alphaComponent = components[3];
+
+        return {
+            red: parseChannel(components[0]),
+            green: parseChannel(components[1]),
+            blue: parseChannel(components[2]),
+            alpha: alphaComponent
+                ? Math.min(1, Math.max(0, Number.parseFloat(alphaComponent) / (alphaComponent.endsWith('%') ? 100 : 1)))
+                : 1
+        };
+    }
+
+    const hexMatch = color.match(/^#([\da-f]{3,8})$/i);
+    if (!hexMatch) {
+        return null;
+    }
+
+    let hex = hexMatch[1];
+    if (hex.length === 3 || hex.length === 4) {
+        hex = [...hex].map((digit) => `${digit}${digit}`).join('');
+    }
+    if (hex.length !== 6 && hex.length !== 8) {
+        return null;
+    }
+
+    return {
+        red: Number.parseInt(hex.slice(0, 2), 16),
+        green: Number.parseInt(hex.slice(2, 4), 16),
+        blue: Number.parseInt(hex.slice(4, 6), 16),
+        alpha: hex.length === 8 ? Number.parseInt(hex.slice(6, 8), 16) / 255 : 1
+    };
+}
+
+function getGradientAverageColor(backgroundImage) {
+    const colors = (backgroundImage.match(/rgba?\([^)]*\)|#[\da-f]{3,8}\b/gi) || [])
+        .map(parseCssColor)
+        .filter(Boolean);
+
+    if (colors.length === 0) {
+        return null;
+    }
+
+    return colors.reduce((average, color) => ({
+        red: average.red + color.red / colors.length,
+        green: average.green + color.green / colors.length,
+        blue: average.blue + color.blue / colors.length,
+        alpha: average.alpha + color.alpha / colors.length
+    }), { red: 0, green: 0, blue: 0, alpha: 0 });
+}
+
+function compositeColors(foreground, background) {
+    return {
+        red: foreground.red * foreground.alpha + background.red * (1 - foreground.alpha),
+        green: foreground.green * foreground.alpha + background.green * (1 - foreground.alpha),
+        blue: foreground.blue * foreground.alpha + background.blue * (1 - foreground.alpha),
+        alpha: 1
+    };
+}
+
+function getImageObjectPositionOffset(position, freeSpace, axis) {
+    const components = position.trim().split(/\s+/);
+    const component = components[axis] || '50%';
+
+    if (component === 'left' || component === 'top') {
+        return 0;
+    }
+    if (component === 'right' || component === 'bottom') {
+        return freeSpace;
+    }
+    if (component === 'center') {
+        return freeSpace / 2;
+    }
+    if (component.endsWith('%')) {
+        return freeSpace * Number.parseFloat(component) / 100;
+    }
+    if (component.endsWith('px')) {
+        return Number.parseFloat(component);
+    }
+
+    return freeSpace / 2;
+}
+
+function getImagePixelAtPoint(image, x, y) {
+    if (!image.complete || image.naturalWidth === 0 || image.naturalHeight === 0) {
+        return null;
+    }
+
+    const sourceUrl = new URL(image.currentSrc || image.src, document.baseURI);
+    if (!['data:', 'blob:'].includes(sourceUrl.protocol) && sourceUrl.origin !== window.location.origin) {
+        if (!warnedImageSampling.has(image)) {
+            console.warn('Skipping header contrast sampling for a cross-origin image:', sourceUrl.href);
+            warnedImageSampling.add(image);
+        }
+        return null;
+    }
+
+    const bounds = image.getBoundingClientRect();
+    const localX = x - bounds.left;
+    const localY = y - bounds.top;
+    if (localX < 0 || localY < 0 || localX > bounds.width || localY > bounds.height) {
+        return null;
+    }
+
+    const style = window.getComputedStyle(image);
+    const naturalWidth = image.naturalWidth;
+    const naturalHeight = image.naturalHeight;
+    let renderedWidth = bounds.width;
+    let renderedHeight = bounds.height;
+
+    if (style.objectFit === 'contain' || style.objectFit === 'cover' || style.objectFit === 'scale-down' || style.objectFit === 'none') {
+        let scale = style.objectFit === 'none'
+            ? 1
+            : style.objectFit === 'cover'
+                ? Math.max(bounds.width / naturalWidth, bounds.height / naturalHeight)
+                : Math.min(bounds.width / naturalWidth, bounds.height / naturalHeight);
+
+        if (style.objectFit === 'scale-down') {
+            scale = Math.min(1, scale);
+        }
+        renderedWidth = naturalWidth * scale;
+        renderedHeight = naturalHeight * scale;
+    }
+
+    const offsetX = getImageObjectPositionOffset(style.objectPosition, bounds.width - renderedWidth, 0);
+    const offsetY = getImageObjectPositionOffset(style.objectPosition, bounds.height - renderedHeight, 1);
+    const sourceX = (localX - offsetX) * naturalWidth / renderedWidth;
+    const sourceY = (localY - offsetY) * naturalHeight / renderedHeight;
+    if (sourceX < 0 || sourceY < 0 || sourceX >= naturalWidth || sourceY >= naturalHeight) {
+        return null;
+    }
+
+    const source = image.currentSrc || image.src;
+    let cachedCanvas = imageSampleCanvases.get(image);
+    if (!cachedCanvas || cachedCanvas.source !== source) {
+        const canvas = document.createElement('canvas');
+        canvas.width = IMAGE_SAMPLE_SIZE;
+        canvas.height = IMAGE_SAMPLE_SIZE;
+        const context = canvas.getContext('2d', { willReadFrequently: true });
+        if (!context) {
+            return null;
+        }
+        context.drawImage(image, 0, 0, IMAGE_SAMPLE_SIZE, IMAGE_SAMPLE_SIZE);
+        cachedCanvas = { canvas, context, source };
+        imageSampleCanvases.set(image, cachedCanvas);
+    }
+
+    const pixelX = Math.min(IMAGE_SAMPLE_SIZE - 1, Math.floor(sourceX / naturalWidth * IMAGE_SAMPLE_SIZE));
+    const pixelY = Math.min(IMAGE_SAMPLE_SIZE - 1, Math.floor(sourceY / naturalHeight * IMAGE_SAMPLE_SIZE));
+    let pixel;
+    try {
+        pixel = cachedCanvas.context.getImageData(pixelX, pixelY, 1, 1).data;
+    } catch (error) {
+        if (error.name !== 'SecurityError') {
+            throw error;
+        }
+        console.warn('Unable to sample image pixels for header contrast:', sourceUrl.href);
+        imageSampleCanvases.delete(image);
+        return null;
+    }
+
+    return {
+        red: pixel[0],
+        green: pixel[1],
+        blue: pixel[2],
+        alpha: pixel[3] / 255 * Number.parseFloat(style.opacity)
+    };
+}
+
+function getColorLuminance(color) {
+    const linearize = (channel) => {
+        const normalized = channel / 255;
+        return normalized <= 0.04045
+            ? normalized / 12.92
+            : ((normalized + 0.055) / 1.055) ** 2.4;
+    };
+
+    return (
+        0.2126 * linearize(color.red)
+        + 0.7152 * linearize(color.green)
+        + 0.0722 * linearize(color.blue)
+    );
+}
+
+function getBackgroundLuminance(elements, x, y, header) {
+    const backgroundLayers = [];
+
+    for (const element of elements) {
+        if (element === header || header.contains(element)) {
+            continue;
+        }
+
+        const style = window.getComputedStyle(element);
+        if (element instanceof HTMLImageElement) {
+            const imageColor = getImagePixelAtPoint(element, x, y);
+            if (imageColor) {
+                imageColor.alpha = Math.min(1, Math.max(0, imageColor.alpha));
+                backgroundLayers.push(imageColor);
+            }
+        }
+
+        const gradientColor = getGradientAverageColor(style.backgroundImage);
+        const backgroundColor = parseCssColor(style.backgroundColor);
+        const opacity = Math.min(1, Math.max(0, Number.parseFloat(style.opacity)));
+
+        if (gradientColor) {
+            gradientColor.alpha *= opacity;
+            backgroundLayers.push(gradientColor);
+        }
+        if (backgroundColor && backgroundColor.alpha > 0) {
+            backgroundColor.alpha *= opacity;
+            backgroundLayers.push(backgroundColor);
+        }
+        if (backgroundLayers.some((layer) => layer.alpha >= 1)) {
+            break;
+        }
+    }
+
+    let background = { red: 255, green: 255, blue: 255, alpha: 1 };
+    for (let index = backgroundLayers.length - 1; index >= 0; index -= 1) {
+        background = compositeColors(backgroundLayers[index], background);
+    }
+
+    return getColorLuminance(background);
+}
+
+function updateHeaderContrast() {
+    const header = document.querySelector('.header');
+    const navMenu = header?.querySelector('.nav-menu');
+    if (!header || !navMenu) {
+        return;
+    }
+
+    const headerBounds = header.getBoundingClientRect();
+    const menuBounds = navMenu.getBoundingClientRect();
+    const sampleY = Math.min(
+        window.innerHeight - 1,
+        Math.max(0, headerBounds.top + headerBounds.height / 2)
+    );
+    const sampleXPositions = [0.2, 0.5, 0.8].map(
+        (ratio) => menuBounds.left + menuBounds.width * ratio
+    );
+    const luminances = sampleXPositions.map((x) => getBackgroundLuminance(
+        document.elementsFromPoint(x, sampleY),
+        x,
+        sampleY,
+        header
+    ));
+
+    const averageLuminance = luminances.length
+        ? luminances.reduce((total, luminance) => total + luminance, 0) / luminances.length
+        : 1;
+    header.classList.toggle(
+        'is-over-dark-background',
+        averageLuminance < DARK_BACKGROUND_LUMINANCE_THRESHOLD
+    );
+}
+
+function scheduleHeaderContrastUpdate() {
+    if (headerContrastFrame) {
+        return;
+    }
+
+    headerContrastFrame = window.requestAnimationFrame(() => {
+        headerContrastFrame = 0;
+        updateHeaderContrast();
+    });
+}
+
 function updateActiveNavItem(element) {
     document.querySelectorAll('.nav-item').forEach((item) => {
         item.classList.remove('active');
@@ -79,6 +368,10 @@ function updateActiveNavItem(element) {
 
 function initializeAnchorNavigation(root = document) {
     root.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        if (anchor.closest('[data-project-chapter-navigation]')) {
+            return;
+        }
+
         if (anchor.dataset.scrollBound === 'true') {
             return;
         }
@@ -133,28 +426,274 @@ function initializeScrollToTop() {
     scrollTopBtn.dataset.bound = 'true';
 }
 
-function initializeTestimonialToggle(root = document) {
-    const quoteToggle = root.querySelector('.project-case-testimonial-mark');
-    const grid = root.querySelector('.project-case-testimonials-grid');
+function initializeProjectChapterNavigation(root = document) {
+    const navigation = root.querySelector('[data-project-chapter-navigation]');
+    if (!navigation) {
+        return;
+    }
 
-    if (!quoteToggle || !grid || quoteToggle.dataset.bound === 'true') {
+    projectChapterNavigationControllers.get(navigation)?.abort();
+
+    const chapterToggle = navigation.querySelector('.project-chapter-navigation__current');
+    const chapterMenu = navigation.querySelector('.project-chapter-navigation__menu');
+    const chapterLabel = navigation.querySelector('.project-chapter-navigation__current-label');
+    const progressBar = navigation.querySelector('.project-chapter-navigation__progress');
+    const progressFill = navigation.querySelector('.project-chapter-navigation__progress-fill');
+    const topButton = navigation.querySelector('.project-chapter-navigation__top');
+    const chapterLinks = [...navigation.querySelectorAll('[data-project-chapter-link]')];
+    const chapters = chapterLinks
+        .map((link) => ({
+            link,
+            section: document.getElementById(link.hash.slice(1)),
+            indicator: link.querySelector('[data-project-chapter-indicator]')
+        }))
+        .filter((chapter) => chapter.section);
+
+    if (!chapterToggle || !chapterMenu || !chapterLabel || !progressBar || !progressFill || !topButton || chapters.length === 0) {
+        console.error('Project chapter navigation is missing required controls or chapter targets.');
+        return;
+    }
+
+    if (chapters.length !== chapterLinks.length) {
+        console.error('Project chapter navigation contains links without matching sections.');
+        return;
+    }
+
+    if (chapters.some(({ indicator }) => !indicator?.dataset.completeSrc || !indicator.dataset.upcomingSrc)) {
+        console.error('Project chapter navigation is missing a chapter status icon.');
+        return;
+    }
+
+    const controller = new AbortController();
+    const { signal } = controller;
+    projectChapterNavigationControllers.set(navigation, controller);
+    const progressEnd = root.querySelector('[data-project-chapter-end]') || chapters[chapters.length - 1].section;
+    let updateFrame = 0;
+
+    const closeMenu = (restoreFocus = false) => {
+        chapterMenu.hidden = true;
+        chapterToggle.setAttribute('aria-expanded', 'false');
+        chapterToggle.setAttribute('aria-label', 'Open project chapters');
+        topButton.setAttribute('aria-label', 'Back to top');
+        scheduleUpdate();
+        if (restoreFocus) {
+            chapterToggle.focus({ preventScroll: true });
+        }
+    };
+
+    let labelText = null;
+    let labelIndex = -1;
+    let labelAnimation = null;
+
+    // Old label slides out and fades; the new one slides in from the opposite side (direction follows scroll)
+    const setChapterLabel = (text, index) => {
+        if (text === labelText) {
+            return;
+        }
+
+        const direction = index >= labelIndex ? 1 : -1;
+        const isInitial = labelText === null;
+        labelText = text;
+        labelIndex = index;
+        labelAnimation?.cancel();
+
+        if (isInitial || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            chapterLabel.textContent = text;
+            return;
+        }
+
+        const slideOut = chapterLabel.animate(
+            [
+                { transform: 'translateY(0)', opacity: 1 },
+                { transform: `translateY(${-direction * 100}%)`, opacity: 0 }
+            ],
+            { duration: 150, easing: 'ease-in' }
+        );
+        labelAnimation = slideOut;
+        slideOut.onfinish = () => {
+            chapterLabel.textContent = labelText;
+            labelAnimation = chapterLabel.animate(
+                [
+                    { transform: `translateY(${direction * 100}%)`, opacity: 0 },
+                    { transform: 'translateY(0)', opacity: 1 }
+                ],
+                { duration: 200, easing: 'ease-out' }
+            );
+        };
+    };
+
+    const updateNavigation = () => {
+        const activeLine = window.scrollY + Math.min(window.innerHeight * 0.35, 200);
+        let activeChapter = chapters[0];
+
+        chapters.forEach((chapter) => {
+            const chapterTop = chapter.section.getBoundingClientRect().top + window.scrollY;
+            if (chapterTop <= activeLine) {
+                activeChapter = chapter;
+            }
+        });
+
+        const activeChapterIndex = chapters.indexOf(activeChapter);
+        setChapterLabel(activeChapter.link.textContent.trim(), activeChapterIndex);
+        const showTopButton = activeChapterIndex > 0 || chapterToggle.getAttribute('aria-expanded') === 'true';
+        topButton.classList.toggle('is-hidden', !showTopButton);
+        const projectStart = chapters[0].section.getBoundingClientRect().top + window.scrollY;
+        const projectEnd = progressEnd.getBoundingClientRect().bottom + window.scrollY;
+        const isProjectComplete = window.scrollY + window.innerHeight >= projectEnd;
+        const navigationTop = window.innerHeight - navigation.offsetHeight;
+        const isPastProject = window.scrollY + navigationTop >= projectEnd;
+        if (isPastProject !== navigation.classList.contains('is-hidden')) {
+            navigation.classList.toggle('is-hidden', isPastProject);
+            if (isPastProject && chapterToggle.getAttribute('aria-expanded') === 'true') {
+                closeMenu(false);
+            }
+        }
+
+        chapters.forEach(({ link, indicator }, index) => {
+            if (link === activeChapter.link) {
+                link.setAttribute('aria-current', 'location');
+            } else {
+                link.removeAttribute('aria-current');
+            }
+
+            const isComplete = index < activeChapterIndex || (isProjectComplete && index === chapters.length - 1);
+            const iconSource = isComplete ? indicator.dataset.completeSrc : indicator.dataset.upcomingSrc;
+            if (indicator.getAttribute('src') !== iconSource) {
+                indicator.setAttribute('src', iconSource);
+            }
+        });
+
+        const scrollableDistance = Math.max(projectEnd - projectStart - window.innerHeight, 1);
+        const progress = Math.min(1, Math.max(0, (window.scrollY - projectStart) / scrollableDistance));
+        const percentage = Math.round(progress * 100);
+
+        progressFill.style.transform = `scaleX(${progress})`;
+        progressBar.setAttribute('aria-valuenow', String(percentage));
+        progressBar.setAttribute('aria-valuetext', `${percentage}% of case study`);
+    };
+
+    const scheduleUpdate = () => {
+        if (updateFrame) {
+            return;
+        }
+        updateFrame = window.requestAnimationFrame(() => {
+            updateFrame = 0;
+            updateNavigation();
+        });
+    };
+
+    const handlePageScroll = () => {
+        if (chapterToggle.getAttribute('aria-expanded') === 'true') {
+            closeMenu(chapterMenu.contains(document.activeElement));
+        }
+        scheduleUpdate();
+    };
+
+    signal.addEventListener('abort', () => {
+        if (updateFrame) {
+            window.cancelAnimationFrame(updateFrame);
+        }
+        labelAnimation?.cancel();
+    }, { once: true });
+
+    chapterToggle.addEventListener('click', () => {
+        const isExpanded = chapterToggle.getAttribute('aria-expanded') === 'true';
+        chapterMenu.hidden = isExpanded;
+        if (!isExpanded) {
+            const activeChapterLink = chapterMenu.querySelector('[aria-current="location"]');
+            if (activeChapterLink) {
+                const activeLinkBounds = activeChapterLink.getBoundingClientRect();
+                const menuBounds = chapterMenu.getBoundingClientRect();
+                const scrollTop =
+                    chapterMenu.scrollTop +
+                    activeLinkBounds.top +
+                    activeLinkBounds.height / 2 -
+                    menuBounds.top -
+                    chapterMenu.clientHeight / 2;
+                const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+                chapterMenu.scrollTo({ top: scrollTop, behavior });
+            }
+        }
+        chapterToggle.setAttribute('aria-expanded', String(!isExpanded));
+        chapterToggle.setAttribute('aria-label', isExpanded ? 'Open project chapters' : 'Close project chapters');
+        topButton.setAttribute('aria-label', isExpanded ? 'Back to top' : 'Close chapter navigation');
+        scheduleUpdate();
+    }, { signal });
+
+    navigation.addEventListener('click', (event) => {
+        const chapterLink = event.target.closest('[data-project-chapter-link]');
+        if (!chapterLink) {
+            return;
+        }
+        closeMenu(true);
+    }, { signal });
+
+    document.addEventListener('click', (event) => {
+        if (!navigation.contains(event.target) && chapterToggle.getAttribute('aria-expanded') === 'true') {
+            closeMenu();
+        }
+    }, { signal });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && chapterToggle.getAttribute('aria-expanded') === 'true') {
+            closeMenu(true);
+        }
+    }, { signal });
+
+    topButton.addEventListener('click', () => {
+        if (chapterToggle.getAttribute('aria-expanded') === 'true') {
+            closeMenu(true);
+            return;
+        }
+
+        const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+        window.history.replaceState(
+            window.history.state,
+            '',
+            `${window.location.pathname}${window.location.search}#hero`
+        );
+        window.scrollTo({ top: 0, behavior });
+    }, { signal });
+
+    window.addEventListener('scroll', handlePageScroll, { passive: true, signal });
+    window.addEventListener('resize', scheduleUpdate, { passive: true, signal });
+    updateNavigation();
+}
+
+function destroyProjectChapterNavigation(root = document) {
+    const navigation = root.querySelector('[data-project-chapter-navigation]');
+    if (!navigation) {
+        return;
+    }
+
+    const controller = projectChapterNavigationControllers.get(navigation);
+    if (controller) {
+        controller.abort();
+        projectChapterNavigationControllers.delete(navigation);
+    }
+}
+
+function initializeTestimonialToggle(root = document) {
+    const toggles = root.querySelectorAll('.project-case-testimonial-mark, .testimonial-card-mark');
+    if (toggles.length === 0) {
         return;
     }
 
     const breakpoint = window.matchMedia('(max-width: 768px)');
     const syncAvailability = () => {
-        const activeToggle = document.querySelector('.project-case-testimonial-mark');
-        const activeGrid = document.querySelector('.project-case-testimonials-grid');
-        if (!activeToggle || !activeGrid) {
-            return;
-        }
+        document.querySelectorAll('.project-case-testimonial-mark, .testimonial-card-mark').forEach((toggle) => {
+            const grid = toggle.closest('.project-case-testimonials-grid, .home-testimonials-grid');
+            if (!grid) {
+                return;
+            }
 
-        activeToggle.disabled = !breakpoint.matches;
-        if (!breakpoint.matches) {
-            activeGrid.classList.remove('is-expanded');
-            activeToggle.setAttribute('aria-expanded', 'false');
-            activeToggle.setAttribute('aria-label', 'Show more testimonials');
-        }
+            toggle.disabled = !breakpoint.matches;
+            if (!breakpoint.matches) {
+                grid.classList.remove('is-expanded');
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.setAttribute('aria-label', 'Show more testimonials');
+            }
+        });
     };
 
     syncAvailability();
@@ -163,16 +702,23 @@ function initializeTestimonialToggle(root = document) {
         hasBoundTestimonialToggleBreakpoint = true;
     }
 
-    quoteToggle.addEventListener('click', () => {
-        if (!breakpoint.matches) {
+    toggles.forEach((toggle) => {
+        if (toggle.dataset.bound === 'true') {
             return;
         }
 
-        const isExpanded = grid.classList.toggle('is-expanded');
-        quoteToggle.setAttribute('aria-expanded', String(isExpanded));
-        quoteToggle.setAttribute('aria-label', `${isExpanded ? 'Hide' : 'Show'} more testimonials`);
+        toggle.addEventListener('click', () => {
+            const grid = toggle.closest('.project-case-testimonials-grid, .home-testimonials-grid');
+            if (!breakpoint.matches || !grid) {
+                return;
+            }
+
+            const isExpanded = grid.classList.toggle('is-expanded');
+            toggle.setAttribute('aria-expanded', String(isExpanded));
+            toggle.setAttribute('aria-label', `${isExpanded ? 'Hide' : 'Show'} more testimonials`);
+        });
+        toggle.dataset.bound = 'true';
     });
-    quoteToggle.dataset.bound = 'true';
 }
 
 function initializeIntersectionObserver(root = document) {
@@ -464,10 +1010,17 @@ function initializeMyWorkStackScrollMotion(root = document) {
         return;
     }
 
-    const multipliers = [0.38, 0.62, 0.86, 1.12];
+    const multipliers = [0.38, 0.62, 0.86, 1.12, 1.36, 1.6];
+    const desktopMotion = window.matchMedia('(min-width: 1201px)');
     let ticking = false;
 
     const update = () => {
+        if (!desktopMotion.matches) {
+            layers.forEach((layer) => layer.style.setProperty('--layer-offset-y', '0px'));
+            ticking = false;
+            return;
+        }
+
         const rect = section.getBoundingClientRect();
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 
@@ -496,6 +1049,69 @@ function initializeMyWorkStackScrollMotion(root = document) {
     update();
 
     section.dataset.stackMotionBound = 'true';
+}
+
+function initializeMyWorkStackHoverDepth(root = document) {
+    const section = root.querySelector('.home-my-work');
+    const visual = section?.querySelector('.home-my-work-visual');
+    if (!visual || visual.dataset.hoverDepthBound === 'true') {
+        return;
+    }
+    visual.dataset.hoverDepthBound = 'true';
+
+    const canHover = window.matchMedia('(min-width: 641px) and (hover: hover) and (pointer: fine)');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const layers = Array.from(visual.querySelectorAll('.home-my-work-layer'));
+    if (layers.length === 0) {
+        return;
+    }
+
+    const maxDepth = 70;
+    const falloff = 320;
+    const current = layers.map(() => 0);
+    const target = layers.map(() => 0);
+    let frame = 0;
+
+    const tick = () => {
+        let settled = true;
+        layers.forEach((layer, index) => {
+            current[index] += (target[index] - current[index]) * 0.12;
+            if (Math.abs(target[index] - current[index]) < 0.05) {
+                current[index] = target[index];
+            } else {
+                settled = false;
+            }
+            layer.style.setProperty('--layer-offset-z', `${current[index].toFixed(2)}px`);
+        });
+        frame = settled ? 0 : requestAnimationFrame(tick);
+    };
+
+    const start = () => {
+        if (!frame) {
+            frame = requestAnimationFrame(tick);
+        }
+    };
+
+    // Cards closer to the pointer come forward along the z axis
+    visual.addEventListener('pointermove', (event) => {
+        if (!canHover.matches || reduceMotion.matches) {
+            return;
+        }
+        layers.forEach((layer, index) => {
+            const rect = layer.getBoundingClientRect();
+            const distance = Math.hypot(
+                event.clientX - (rect.left + rect.width / 2),
+                event.clientY - (rect.top + rect.height / 2)
+            );
+            target[index] = maxDepth * Math.max(0, 1 - distance / falloff);
+        });
+        start();
+    });
+
+    visual.addEventListener('pointerleave', () => {
+        target.fill(0);
+        start();
+    });
 }
 
 function getViewportSize() {
@@ -601,7 +1217,9 @@ function bindGlobalHandlers() {
 }
 
 function initializePageFeatures(container = document) {
+    initializeLazyImagePreloading(container);
     initializeAnchorNavigation(container);
+    initializeProjectChapterNavigation(container);
     initializeScrollToTop();
     initializeTestimonialToggle(container);
     initializeIntersectionObserver(container);
@@ -612,8 +1230,48 @@ function initializePageFeatures(container = document) {
     initializeParallax(container);
     initializeMyWorkDotGrid(container);
     initializeMyWorkStackScrollMotion(container);
+    initializeMyWorkStackHoverDepth(container);
     initializeMobileMenu(container);
     updateActiveNavOnScroll();
+}
+
+function initializeLazyImagePreloading(root = document) {
+    const pageContainer = root.matches?.(LAZY_IMAGE_PRELOAD_SELECTOR)
+        ? root
+        : root.querySelector(LAZY_IMAGE_PRELOAD_SELECTOR);
+
+    if (!pageContainer || !('IntersectionObserver' in window)) {
+        return;
+    }
+
+    lazyImagePreloadObservers.get(pageContainer)?.disconnect();
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+                return;
+            }
+
+            entry.target.loading = 'eager';
+            observer.unobserve(entry.target);
+        });
+    }, { rootMargin: '2000px 0px' });
+
+    pageContainer.querySelectorAll('img[loading="lazy"]').forEach((image) => {
+        observer.observe(image);
+    });
+
+    lazyImagePreloadObservers.set(pageContainer, observer);
+}
+
+function destroyLazyImagePreloading(container) {
+    const observer = lazyImagePreloadObservers.get(container);
+    if (!observer) {
+        return;
+    }
+
+    observer.disconnect();
+    lazyImagePreloadObservers.delete(container);
 }
 
 /* ========================
@@ -703,6 +1361,11 @@ function initializeBarba() {
 
     window.barba.hooks.before(() => {
         startPageLoadProgress();
+    });
+
+    window.barba.hooks.beforeLeave((data) => {
+        destroyProjectChapterNavigation(data.current.container);
+        destroyLazyImagePreloading(data.current.container);
     });
 
     window.barba.hooks.after(() => {

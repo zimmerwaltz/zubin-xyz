@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Brewing a better retail experience for coffee lovers - project case study by Zubin Charles.">
     <title>Brewing a better retail experience for coffee lovers | Zubin Charles</title>
     <link rel="stylesheet" href="../assets/fonts/fonts.css">
@@ -31,6 +31,127 @@
             <?php include "../include/header.php"; ?>
         </header>
 
+        <nav class="project-chapter-navigation" data-project-chapter-navigation aria-label="Case study chapters">
+            <div class="project-chapter-navigation__menu" id="project-chapter-navigation-menu" hidden>
+                <ol class="project-chapter-navigation__list">
+                    <li>
+                        <a href="#hero" data-project-chapter-link aria-current="location">
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Project overview</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#the-process" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>The process</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#problem-statement" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Problem statement</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#current-experience" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Current experience</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#challenges" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Challenges</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#key-artefacts" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Key artefacts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#visual-design" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Visual design</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#app-experience" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>App experience</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#ordering-experience" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Ordering experience</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#rewards-and-stores" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Rewards &amp; store experience</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#localization-and-scan" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Localization &amp; in-store scan</span>
+                        </a>
+                    </li>
+                </ol>
+            </div>
+            <div class="project-chapter-navigation__controls">
+                <button
+                    class="project-chapter-navigation__current"
+                    type="button"
+                    aria-label="Open project chapters"
+                    aria-expanded="false"
+                    aria-controls="project-chapter-navigation-menu"
+                >
+                    <img src="../assets/icons/project-chapter-list.svg" alt="" aria-hidden="true" width="16" height="16">
+                    <span class="project-chapter-navigation__current-label">Project overview</span>
+                    <span
+                        class="project-chapter-navigation__progress"
+                        role="progressbar"
+                        aria-label="Project reading progress"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                        aria-valuetext="0% of case study"
+                    >
+                        <span class="project-chapter-navigation__progress-fill"></span>
+                    </span>
+                </button>
+                <button class="project-chapter-navigation__top" type="button" aria-label="Back to top">
+                    <span class="icon-mask icon-chevron-up" aria-hidden="true"></span>
+                </button>
+            </div>
+        </nav>
+
         <section class="home-section project-case-hero" id="hero" aria-label="Project overview">
             <div class="home-shell project-case-hero-shell">
                 <div class="project-case-top-actions">
@@ -39,14 +160,17 @@
                         <span>All Projects</span>
                     </a>
                     <div class="project-case-project-nav">
-                        <div class="project-case-nav-control" data-tooltip="Previous Project">
-                            <a href="<?php echo htmlspecialchars($previous_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button" aria-label="<?php echo htmlspecialchars('Previous project: ' . $previous_project_name, ENT_QUOTES, 'UTF-8'); ?>">
+                        <div class="project-case-nav-control">
+                            <a href="<?php echo htmlspecialchars($previous_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button project-case-labeled-button" aria-label="<?php echo htmlspecialchars('Previous project: ' . $previous_project_name, ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="btn-icon icon-mask icon-chevron-left" aria-hidden="true"></span>
+                                <span class="project-case-button-label">Prev</span>
                             </a>
                         </div>
-                        <div class="project-case-nav-control" data-tooltip="Next Project">
-                            <a href="<?php echo htmlspecialchars($next_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button" aria-label="<?php echo htmlspecialchars('Next project: ' . $next_project_name, ENT_QUOTES, 'UTF-8'); ?>">
+                        <div class="project-case-nav-control">
+                            <a href="<?php echo htmlspecialchars($next_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button project-case-labeled-button" aria-label="<?php echo htmlspecialchars('Next project: ' . $next_project_name, ENT_QUOTES, 'UTF-8'); ?>">
+                                <span class="project-case-button-label">Next</span>
                                 <span class="btn-icon icon-mask icon-chevron-right" aria-hidden="true"></span>
+
                             </a>
                         </div>
                     </div>
@@ -60,6 +184,8 @@
                             alt="Coffee drinks and a mobile loyalty app for a retail coffee experience"
                             width="2400"
                             height="1280"
+                            loading="eager"
+                            fetchpriority="high"
                         >
                     </div>
                 </div>
@@ -97,7 +223,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-process project-case-process-coffee-retail" aria-label="Design process">
+        <section class="home-section project-case-process project-case-process-coffee-retail" id="the-process" data-project-chapter aria-label="Design process">
             <div class="home-shell project-case-process-shell">
                 <div class="project-case-process-graphic" aria-hidden="true">
                     <?php include "../assets/images/process.svg"; ?>
@@ -140,7 +266,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-problem project-case-problem-coffee-retail project-case-dark" aria-label="Problem statement">
+        <section class="home-section project-case-problem project-case-problem-coffee-retail project-case-dark" id="problem-statement" data-project-chapter aria-label="Problem statement">
             <div class="home-shell project-case-problem-shell">
                 <div class="project-case-problem-intro">
                     <div class="project-case-problem-graphic" aria-hidden="true">
@@ -154,7 +280,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-current-experience project-case-current-experience-coffee-retail" aria-labelledby="current-experience-title">
+        <section class="home-section project-case-current-experience project-case-current-experience-coffee-retail" id="current-experience" data-project-chapter aria-labelledby="current-experience-title">
             <div class="home-shell project-case-current-experience-shell">
                 <div class="project-section-copy copy-left copy-light project-case-current-experience-heading">
                     <h2 id="current-experience-title">Current experience</h2>
@@ -170,7 +296,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-challenges project-case-challenges-coffee-retail" aria-labelledby="coffee-retail-challenges-title">
+        <section class="home-section project-case-challenges project-case-challenges-coffee-retail" id="challenges" data-project-chapter aria-labelledby="coffee-retail-challenges-title">
             <div class="home-shell project-case-challenges-coffee-retail-shell">
                 <div class="project-section-copy copy-left copy-light project-case-challenges-coffee-retail-heading">
                     <h2 id="coffee-retail-challenges-title">Whats weighing it down?</h2>
@@ -228,7 +354,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-key-artefacts project-case-key-artefacts-coffee-retail" aria-labelledby="key-artefacts-title">
+        <section class="home-section project-case-key-artefacts project-case-key-artefacts-coffee-retail" id="key-artefacts" data-project-chapter aria-labelledby="key-artefacts-title">
             <div class="home-shell project-case-key-artefacts-shell">
                 <div class="project-section-copy copy-left copy-light project-case-key-artefacts-heading">
                     <h2 id="key-artefacts-title">Key artefacts</h2>
@@ -268,7 +394,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-dark project-case-visual-designs project-case-visual-designs-coffee-retail" aria-labelledby="coffee-retail-visual-design-title">
+        <section class="home-section project-case-dark project-case-visual-designs project-case-visual-designs-coffee-retail" id="visual-design" data-project-chapter aria-labelledby="coffee-retail-visual-design-title">
             <div class="home-shell project-case-visual-shell">
                 <div class="project-section-copy copy-left copy-light">
                     <h2 id="coffee-retail-visual-design-title">Visual design</h2>
@@ -331,7 +457,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-app-icon" aria-labelledby="coffee-retail-app-icon-title">
+        <section class="home-section project-case-app-icon" id="app-experience" data-project-chapter aria-labelledby="coffee-retail-app-icon-title">
             <div class="home-shell project-case-app-icon-shell">
                 <div class="project-case-app-icon-dock">
                     <p class="type-body-xl-regular">Access quick actions by tapping<br>and holding a card.</p>
@@ -538,7 +664,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-order-options" aria-labelledby="coffee-retail-order-options-title">
+        <section class="home-section project-case-order-options" id="ordering-experience" data-project-chapter aria-labelledby="coffee-retail-order-options-title">
             <div class="home-shell project-case-order-options-shell">
                 <header class="project-case-order-options-heading">
                     <h2 class="project-case-app-icon-title" id="coffee-retail-order-options-title">Your order, served 3 ways. On your time.</h2>
@@ -807,7 +933,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-rewards" aria-labelledby="coffee-retail-rewards-title">
+        <section class="home-section project-case-rewards" id="rewards-and-stores" data-project-chapter aria-labelledby="coffee-retail-rewards-title">
             <div class="home-shell project-case-rewards-shell">
                 <div class="project-case-rewards-overview">
                     <header class="project-case-rewards-heading">
@@ -1003,7 +1129,7 @@
             </div>
         </section>
 
-        <section class="project-case-localization-scan" aria-label="Starbucks Hindi app and in-store scanning">
+        <section class="project-case-localization-scan" id="localization-and-scan" data-project-chapter aria-label="Starbucks Hindi app and in-store scanning">
             <div class="project-case-localization-panel project-case-hindi-panel">
                 <header class="project-case-hindi-heading">
                     <h2 class="project-case-app-icon-title">स्टारबक्स अब हिंदी में भी उपलब्ध है</h2>
@@ -1050,7 +1176,7 @@
             </div>
         </section>
 
-        <section class="project-case-sticker-sheet" aria-label="Starbucks sticker sheet">
+        <section class="project-case-sticker-sheet" data-project-chapter-end aria-label="Starbucks sticker sheet">
             <img
                 src="../assets/images/brewing-a-better-retail-experience-for-coffee-lovers/starbucks-stickersheet.png"
                 alt="Starbucks app sticker sheet showing interface cards, icons, and coffee product imagery"

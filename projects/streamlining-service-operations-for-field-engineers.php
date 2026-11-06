@@ -28,7 +28,168 @@
             <?php include "../include/header.php"; ?>
         </header>
 
-        <section class="home-section project-case-hero" id="hero" aria-label="Project overview">
+        <nav class="project-chapter-navigation" data-project-chapter-navigation aria-label="Case study chapters">
+            <div class="project-chapter-navigation__menu" id="project-chapter-navigation-menu" hidden>
+                <ol class="project-chapter-navigation__list">
+                    <li>
+                        <a href="#hero" data-project-chapter-link aria-current="location">
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Project overview</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#the-process" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>The process</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#problem-statement" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Problem statement</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#workshop" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Workshop</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#current-experience" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Current experience</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#challenges" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Challenges</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#key-artefacts" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Key artefacts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#visual-design" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Visual design</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#key-pillars" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Key pillars</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#styleguide" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Styleguide</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#dashboard" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#quick-actions" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Quick actions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#activity-tracking" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Activity tracking</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#key-screens" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Key screens</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#technical-resources" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Technical resources</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#projected-gains" data-project-chapter-link>
+                            <span class="project-chapter-navigation__indicator" aria-hidden="true">
+                                <img src="../assets/icons/project-chapter-check-upcoming.svg" alt="" data-project-chapter-indicator data-complete-src="../assets/icons/project-chapter-check-complete.svg" data-upcoming-src="../assets/icons/project-chapter-check-upcoming.svg">
+                            </span>
+                            <span>Projected gains</span>
+                        </a>
+                    </li>
+                </ol>
+            </div>
+            <div class="project-chapter-navigation__controls">
+                <button
+                    class="project-chapter-navigation__current"
+                    type="button"
+                    aria-label="Open project chapters"
+                    aria-expanded="false"
+                    aria-controls="project-chapter-navigation-menu"
+                >
+                    <img src="../assets/icons/project-chapter-list.svg" alt="" aria-hidden="true" width="16" height="16">
+                    <span class="project-chapter-navigation__current-label">Project overview</span>
+                    <span
+                        class="project-chapter-navigation__progress"
+                        role="progressbar"
+                        aria-label="Project reading progress"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                        aria-valuetext="0% of case study"
+                    >
+                        <span class="project-chapter-navigation__progress-fill"></span>
+                    </span>
+                </button>
+                <button class="project-chapter-navigation__top" type="button" aria-label="Back to top">
+                    <span class="icon-mask icon-chevron-up" aria-hidden="true"></span>
+                </button>
+            </div>
+        </nav>
+
+        <section class="home-section project-case-hero" id="hero" data-project-chapter aria-label="Project overview">
             <div class="home-shell project-case-hero-shell">
                 <div class="project-case-top-actions">
                     <a href="../product_design.php" class="btn btn-outline">
@@ -36,13 +197,15 @@
                         <span>All Projects</span>
                     </a>
                     <div class="project-case-project-nav">
-                        <div class="project-case-nav-control" data-tooltip="Previous Project">
-                            <a href="<?php echo htmlspecialchars($previous_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button" aria-label="<?php echo htmlspecialchars('Previous project: ' . $previous_project_name, ENT_QUOTES, 'UTF-8'); ?>">
+                        <div class="project-case-nav-control">
+                            <a href="<?php echo htmlspecialchars($previous_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button project-case-labeled-button" aria-label="<?php echo htmlspecialchars('Previous project: ' . $previous_project_name, ENT_QUOTES, 'UTF-8'); ?>">
                                 <span class="btn-icon icon-mask icon-chevron-left" aria-hidden="true"></span>
+                                <span class="project-case-button-label">Prev</span>
                             </a>
                         </div>
-                        <div class="project-case-nav-control" data-tooltip="Next Project">
-                            <a href="<?php echo htmlspecialchars($next_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button" aria-label="<?php echo htmlspecialchars('Next project: ' . $next_project_name, ENT_QUOTES, 'UTF-8'); ?>">
+                        <div class="project-case-nav-control">
+                            <a href="<?php echo htmlspecialchars($next_project_href, ENT_QUOTES, 'UTF-8'); ?>" class="btn btn-outline project-case-icon-button project-case-labeled-button" aria-label="<?php echo htmlspecialchars('Next project: ' . $next_project_name, ENT_QUOTES, 'UTF-8'); ?>">
+                                <span class="project-case-button-label">Next</span>
                                 <span class="btn-icon icon-mask icon-chevron-right" aria-hidden="true"></span>
                             </a>
                         </div>
@@ -57,6 +220,8 @@
                             alt="TaskPilot field service operations dashboard displayed on a smartphone held in a hand"
                             width="2400"
                             height="1280"
+                            loading="eager"
+                            fetchpriority="high"
                         >
                     </div>
                 </div>
@@ -94,7 +259,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-process" aria-label="Design process">
+        <section class="home-section project-case-process" id="the-process" data-project-chapter aria-label="Design process">
             <div class="home-shell project-case-process-shell">
                 <div class="project-case-process-graphic" aria-hidden="true">
                     <?php include "../assets/images/process.svg"; ?>
@@ -137,7 +302,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-problem project-case-dark project-case-problem-field-engineer" aria-label="Problem statement">
+        <section class="home-section project-case-problem project-case-dark project-case-problem-field-engineer" id="problem-statement" data-project-chapter aria-label="Problem statement">
             <div class="home-shell project-case-problem-shell">
                 <div class="project-case-problem-intro">
                     <div class="project-case-problem-graphic" aria-hidden="true">
@@ -155,6 +320,7 @@
                             alt="Field service engineer loading equipment into a service van"
                             width="1200"
                             height="800"
+                            loading="lazy"
                         >
                     </div>
                     <aside class="project-case-problem-user-quote">
@@ -164,7 +330,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-workshop project-case-workshop-field-engineer" aria-label="Workshop">
+        <section class="home-section project-case-workshop project-case-workshop-field-engineer" id="workshop" data-project-chapter aria-label="Workshop">
             <div class="home-shell project-case-workshop-shell">
                 <h2 class="project-case-workshop-title">Workshop</h2>
                 <img
@@ -173,6 +339,7 @@
                     alt="Workshop travel map from Mumbai to Bengaluru with travel distance, participants, days, teams, and application metrics"
                     width="2400"
                     height="1350"
+                    loading="lazy"
                 >
                 <div class="project-case-workshop-days">
                     <div class="project-case-workshop-day">
@@ -195,6 +362,7 @@
                                     alt="Team collaborating around a table during the workshop"
                                     width="1152"
                                     height="694"
+                                    loading="lazy"
                                 >
                             </figure>
                         </div>
@@ -219,6 +387,7 @@
                                     alt="Workshop boards showing user research, pain points, and application flows"
                                     width="1152"
                                     height="844"
+                                    loading="lazy"
                                 >
                             </figure>
                         </div>
@@ -244,6 +413,7 @@
                                     alt="Information architecture and service workflow diagrams from the workshop"
                                     width="1152"
                                     height="1039"
+                                    loading="lazy"
                                 >
                             </figure>
                         </div>
@@ -267,6 +437,7 @@
                                     alt="Hands reviewing a mobile interface prototype with a stylus"
                                     width="1152"
                                     height="710"
+                                    loading="lazy"
                                 >
                             </figure>
                         </div>
@@ -275,7 +446,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-current-experience project-case-current-experience-field-engineer" aria-labelledby="current-experience-title">
+        <section class="home-section project-case-current-experience project-case-current-experience-field-engineer" id="current-experience" data-project-chapter aria-labelledby="current-experience-title">
             <div class="home-shell project-case-current-experience-shell">
                 <div class="project-section-copy copy-left copy-light project-case-current-experience-heading">
                     <h2 id="current-experience-title">Current experience</h2>
@@ -291,7 +462,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-challenges project-case-challenges-field-engineer" aria-labelledby="field-engineer-challenges-title">
+        <section class="home-section project-case-challenges project-case-challenges-field-engineer" id="challenges" data-project-chapter aria-labelledby="field-engineer-challenges-title">
             <div class="home-shell project-case-challenges-field-engineer-shell">
                 <div class="project-section-copy copy-left copy-light project-case-challenges-field-engineer-heading">
                     <h2 id="field-engineer-challenges-title">Whats weighing it down?</h2>
@@ -349,7 +520,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-key-artefacts" aria-labelledby="key-artefacts-title">
+        <section class="home-section project-case-key-artefacts" id="key-artefacts" data-project-chapter aria-labelledby="key-artefacts-title">
             <div class="home-shell project-case-key-artefacts-shell">
                 <div class="project-section-copy copy-left copy-light project-case-key-artefacts-heading">
                     <h2 id="key-artefacts-title">Key artefacts</h2>
@@ -401,21 +572,21 @@
             </div>
         </section>        
 
-        <section class="home-section project-case-dark project-case-visual-designs project-case-visual-designs-field-engineer" aria-labelledby="field-engineer-visual-design-title">
+        <section class="home-section project-case-dark project-case-visual-designs project-case-visual-designs-field-engineer" id="visual-design" data-project-chapter aria-labelledby="field-engineer-visual-design-title">
             <div class="home-shell project-case-visual-shell">
                 <div class="project-section-copy copy-left copy-light">
                     <h2 id="field-engineer-visual-design-title">Visual design</h2>
                     <p>A glimpse into some of the key screens.</p>
                 </div>
                 <div class="project-case-visual-main project-case-visual-main-field-engineer" aria-hidden="true">
-                    <video class="project-case-visual-login-video" autoplay muted loop playsinline preload="metadata">
-                        <source src="../assets/images/streamlining-service-operations-for-field-engineers/login.mp4" type="video/mp4">
+                    <video class="project-case-visual-login-video" autoplay muted loop playsinline preload="auto">
+                        <source src="field-engineer-login-video.php" type="video/mp4">
                     </video>
                 </div>
             </div>
         </section>
 
-        <section class="home-section project-case-key-pillars-field-engineer" aria-labelledby="field-engineer-key-pillars-title">
+        <section class="home-section project-case-key-pillars-field-engineer" id="key-pillars" data-project-chapter aria-labelledby="field-engineer-key-pillars-title">
             <div class="home-shell project-case-key-pillars-shell">
                 <h2 class="project-case-key-pillars-title" id="field-engineer-key-pillars-title">The key pillars</h2>
                 <ul class="project-case-key-pillars-list">
@@ -498,7 +669,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-styleguide project-case-styleguide-field-engineer" aria-labelledby="field-engineer-styleguide-title">
+        <section class="home-section project-case-styleguide project-case-styleguide-field-engineer" id="styleguide" data-project-chapter aria-labelledby="field-engineer-styleguide-title">
             <div class="home-shell project-case-styleguide-shell-field-engineer">
                 <div class="project-case-styleguide-content">
                     <div class="project-section-copy copy-left copy-light">
@@ -520,7 +691,7 @@
         </section>
 
 
-        <section class="home-section project-case-dashboard-showcase" aria-labelledby="field-engineer-dashboard-title">
+        <section class="home-section project-case-dashboard-showcase" id="dashboard" data-project-chapter aria-labelledby="field-engineer-dashboard-title">
             <div class="home-shell project-case-dashboard-shell">
                 <h2 class="project-case-dashboard-title" id="field-engineer-dashboard-title">
                     <span>A dashboard that</span>
@@ -578,7 +749,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-quick-actions-field-engineer" aria-labelledby="field-engineer-quick-actions-title">
+        <section class="home-section project-case-quick-actions-field-engineer" id="quick-actions" data-project-chapter aria-labelledby="field-engineer-quick-actions-title">
             <div class="home-shell project-case-quick-actions-shell">
                 <h2 class="project-case-quick-actions-title" id="field-engineer-quick-actions-title">Access quick actions by tapping and holding a card.</h2>
                 <div class="project-case-quick-actions-layout">
@@ -609,7 +780,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-activity-tracking-field-engineer" aria-labelledby="field-engineer-activity-tracking-title">
+        <section class="home-section project-case-activity-tracking-field-engineer" id="activity-tracking" data-project-chapter aria-labelledby="field-engineer-activity-tracking-title">
             <div class="home-shell project-case-activity-tracking-shell">
                 <h2 class="project-case-activity-tracking-title" id="field-engineer-activity-tracking-title">Execute &amp; track all activities related to a work order</h2>
                 <div class="project-case-activity-tracking-layout">
@@ -638,7 +809,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-key-screens-field-engineer" aria-labelledby="field-engineer-key-screens-title">
+        <section class="home-section project-case-key-screens-field-engineer" id="key-screens" data-project-chapter aria-labelledby="field-engineer-key-screens-title">
             <div class="home-shell project-case-key-screens-shell">
                 <div class="project-case-key-screens-feature">
                     <h2 class="project-case-key-screens-title" id="field-engineer-key-screens-title">Execute &amp; track all activities related to a work order</h2>
@@ -709,7 +880,7 @@
             </div>
         </section>
 
-        <section class="home-section project-case-technical-features-field-engineer">
+        <section class="home-section project-case-technical-features-field-engineer" id="technical-resources" data-project-chapter>
             <div class="home-shell project-case-technical-features-shell">
                 <div class="project-case-technical-features-grid">
                     <article class="project-case-technical-feature">
@@ -761,7 +932,7 @@
             </div>
         </section>
 
-        <section class="project-case-dark project-case-projected-gains" aria-labelledby="project-case-projected-gains-title">
+        <section class="project-case-dark project-case-projected-gains" id="projected-gains" data-project-chapter data-project-chapter-end aria-labelledby="project-case-projected-gains-title">
             <figure class="project-case-projected-gains-image">
                 <img
                     src="../assets/images/streamlining-service-operations-for-field-engineers/projected-gains.png"

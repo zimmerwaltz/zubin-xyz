@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Zubin Charles - UX architect and product design lead.">
+    <meta name="description" content="A seasoned UX architect dedicated crafting intuitive interfaces across diverse sectors including healthcare, insurance, life sciences ecommerce and travel.">
     <title>Zubin Charles - Home</title>
     <link rel="stylesheet" href="assets/fonts/fonts.css">
     <link rel="stylesheet" href="assets/css/tailwind.css">
@@ -27,7 +27,7 @@
                 <div class="home-hero-visual">
                     <div class="home-hero-portrait-panel">
                         <div class="home-hero-orbit" aria-hidden="true">
-                            <img class="coming-soon-logo" src="assets/images/logo-circular.svg" alt="Zubin Charles mark">
+                            <img class="logo-circular" src="assets/images/logo-circular.svg" alt="Zubin Charles mark">
                         </div>
                         <div class="home-hero-portrait">
                             <img src="assets/images/home/headshot-effect.png" alt="Stylized portrait of Zubin Charles">
@@ -64,7 +64,7 @@
             <div class="home-shell home-my-work-layout">
                 <div class="home-my-work-copy-block">
                     <!-- <h2 class="home-my-work-title">Product Design</h2> -->
-                    <h2 class="page-home home-section-title">Product Design</h2>
+                    <h2 class="home-section-title">Product Design</h2>
                     <p class="home-my-work-copy type-body-lg-regular">A curated collection of work across domains.</p>
                     <a href="product_design.php" class="btn btn-primary home-my-work-button">
                         <span>View Projects</span>
@@ -85,6 +85,13 @@
                         <div class="home-my-work-layer home-my-work-layer-4">
                             <img src="assets/images/home/project-card/project-4.png" alt="" loading="lazy">
                         </div>
+                        <div class="home-my-work-layer home-my-work-layer-5">
+                            <img src="assets/images/home/project-card/project-5.png" alt="" loading="lazy">
+                        </div>
+                        <div class="home-my-work-layer home-my-work-layer-6">
+                            <img src="assets/images/home/project-card/project-6.png" alt="" loading="lazy">
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -383,9 +390,10 @@
                             </div>
                         </div>
                     </article>
-                    <div class="testimonial-card-mark" aria-hidden="true">
+                    <button class="testimonial-card-mark" type="button" aria-expanded="false" aria-label="Show more testimonials">
                         <img src="assets/images/quote.svg" alt="">
-                    </div>
+                        <span class="icon-mask icon-chevron-down" aria-hidden="true"></span>
+                    </button>
                 </div>
             </div>
         </section>
