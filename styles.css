@@ -7490,12 +7490,14 @@ button:not(.btn),
     align-items: center;
     justify-content: center;
     padding: 48px;
+    color: var(--c-text-color-default-0);
 }
 
 .page-project-case-study .project-case-problem-user-quote p {
     margin: 0;
     font-size: 20px;
     line-height: 32px;
+    color: var(--c-text-color-default-0);
 }
 
 .page-project-case-study .home-section.project-case-problem-field-engineer {
@@ -7745,6 +7747,10 @@ button:not(.btn),
 .page-project-case-study .project-case-dark p,
 .page-project-case-study .project-case-dark li {
     color: var(--c-text-color-on-color-0);
+}
+
+.page-project-case-study .project-case-dark .project-case-problem-user-quote p {
+    color: var(--c-text-color-default-0);
 }
 
 .page-project-case-study .home-section.project-case-vision {
@@ -11902,6 +11908,11 @@ button:not(.btn),
 
     .page-project-case-study .project-case-visual-designs-field-engineer .project-case-visual-shell {
         grid-template-columns: minmax(0, 1fr);
+    }
+
+    .page-project-case-study .project-case-visual-designs .project-section-copy {
+        align-items: center;
+        text-align: center;
     }
 
     .page-project-case-study .project-case-process-shell {

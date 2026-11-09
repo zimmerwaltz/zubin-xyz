@@ -1218,6 +1218,7 @@ function bindGlobalHandlers() {
 
 function initializePageFeatures(container = document) {
     initializeLazyImagePreloading(container);
+    initializeAutoplayVideos(container);
     initializeAnchorNavigation(container);
     initializeProjectChapterNavigation(container);
     initializeScrollToTop();
@@ -1233,6 +1234,31 @@ function initializePageFeatures(container = document) {
     initializeMyWorkStackHoverDepth(container);
     initializeMobileMenu(container);
     updateActiveNavOnScroll();
+}
+
+function initializeAutoplayVideos(container = document) {
+    const videos = container.querySelectorAll?.('video[autoplay]') ?? [];
+
+    videos.forEach((video) => {
+        video.defaultMuted = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.loop = true;
+
+        const playVideo = () => {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch((error) => {
+                    if (error.name !== 'NotAllowedError') {
+                        console.warn('Unable to autoplay video.', error);
+                    }
+                });
+            }
+        };
+
+        video.addEventListener('loadedmetadata', playVideo, { once: true });
+        playVideo();
+    });
 }
 
 function initializeLazyImagePreloading(root = document) {
