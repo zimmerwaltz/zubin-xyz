@@ -1849,6 +1849,13 @@ p {
     width: 40px;
     height: 40px;
     flex-shrink: 0;
+}
+
+.scroll-to-top.btn {
+    padding: 0;
+}
+
+.scroll-to-top:not(.btn) {
     border: var(--s-border-width-md) solid var(--c-border-color-default-1);
     background-color: var(--c-surface-color-primary-default);
     border-radius: 50%;
@@ -1860,7 +1867,7 @@ p {
     transition: var(--transition);
 }
 
-.scroll-to-top:hover {
+.scroll-to-top:not(.btn):hover {
     transform: translateY(-2px);
     border-color: var(--c-surface-color-primary-default);
 }
@@ -2116,7 +2123,7 @@ button:not(.btn),
     color: var(--c-text-color-default-0);
 }
 
-.page-home :where(*):not(button):not(button *):not(.btn):not(.btn *):not(.logo.home-brand):not(.project-case-loyalty-tiers li):not(.project-case-dashboard-supporting-card img):not(.project-case-key-screens-card-image):not(.project-case-technical-feature-image):not(.project-case-app-icon-levels img):not(.project-case-customisation-feature img):not(.project-case-bag-showcase-feature img):not(.project-case-order-tracking-feature img):not(.project-case-rewards-screen-image):not(.project-case-store-page-mockup-image):not(.project-case-fun-games-image):not(.project-case-login-option):not(.project-case-more-link):not(.project-chapter-navigation__menu) {
+.page-home :where(*):not(button):not(button *):not(.btn):not(.btn *):not(.logo.home-brand):not(.project-case-loyalty-tiers li):not(.project-case-dashboard-supporting-card img):not(.project-case-key-screens-card-image):not(.project-case-technical-feature-image):not(.project-case-app-icon-levels img):not(.project-case-customisation-feature img):not(.project-case-bag-showcase-feature img):not(.project-case-order-tracking-feature img):not(.project-case-rewards-screen-image):not(.project-case-store-page-mockup-image):not(.project-case-fun-games-image):not(.project-case-login-option):not(.project-case-more-link):not(.project-chapter-navigation__menu):not([data-project-chapter-link]) {
     border-radius: 0 !important;
 }
 
@@ -4520,6 +4527,9 @@ button:not(.btn),
     width: 40px;
     height: 40px;
     flex-shrink: 0;
+}
+
+.scroll-to-top:not(.btn) {
     border: var(--s-border-width-md) solid var(--c-border-color-default-1);
     background-color: var(--c-surface-color-primary-default);
     border-radius: 50%;
@@ -4531,7 +4541,7 @@ button:not(.btn),
     transition: var(--transition);
 }
 
-.scroll-to-top:hover {
+.scroll-to-top:not(.btn):hover {
     transform: translateY(-2px);
     border-color: var(--c-surface-color-primary-default);
 }
@@ -4787,7 +4797,7 @@ button:not(.btn),
     color: var(--c-text-color-default-0);
 }
 
-.page-home :where(*):not(button):not(button *):not(.btn):not(.btn *):not(.logo.home-brand):not(.project-case-loyalty-tiers li):not(.project-case-dashboard-supporting-card img):not(.project-case-key-screens-card-image):not(.project-case-technical-feature-image):not(.project-case-app-icon-levels img):not(.project-case-customisation-feature img):not(.project-case-bag-showcase-feature img):not(.project-case-order-tracking-feature img):not(.project-case-rewards-screen-image):not(.project-case-store-page-mockup-image):not(.project-case-fun-games-image):not(.project-case-login-option):not(.project-case-more-link):not(.project-chapter-navigation__menu) {
+.page-home :where(*):not(button):not(button *):not(.btn):not(.btn *):not(.logo.home-brand):not(.project-case-loyalty-tiers li):not(.project-case-dashboard-supporting-card img):not(.project-case-key-screens-card-image):not(.project-case-technical-feature-image):not(.project-case-app-icon-levels img):not(.project-case-customisation-feature img):not(.project-case-bag-showcase-feature img):not(.project-case-order-tracking-feature img):not(.project-case-rewards-screen-image):not(.project-case-store-page-mockup-image):not(.project-case-fun-games-image):not(.project-case-login-option):not(.project-case-more-link):not(.project-chapter-navigation__menu):not([data-project-chapter-link]) {
     border-radius: 0 !important;
 }
 
@@ -6852,7 +6862,7 @@ button:not(.btn),
     align-items: center;
     justify-content: flex-end;
     gap: var(--s-spacing-80);
-    padding: var(--s-spacing-240) var(--s-spacing-240) calc(var(--s-spacing-240) + env(safe-area-inset-bottom));
+    padding: var(--s-spacing-240) var(--s-spacing-240) calc(var(--s-spacing-160) + env(safe-area-inset-bottom));
     transition: transform 300ms ease, opacity 300ms ease, visibility 0s linear 0s;
 }
 
@@ -6914,7 +6924,7 @@ button:not(.btn),
     gap: var(--s-spacing-40);
     overflow: hidden;
     padding: var(--s-spacing-160);
-    border-radius: var(--s-border-radius-sm);
+    border-radius: var(--s-border-radius-xs);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
     font-family: var(--s-font-primary-font-family);
     font-size: var(--r-font-body-body-sm-font-size);
@@ -6960,7 +6970,7 @@ button:not(.btn),
 .page-project-case-study .project-chapter-navigation__top {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    border-radius: var(--s-border-radius-xs);
     box-shadow: 0 2.5px 1.25px 0 rgba(0, 0, 0, 0.2);
     transition: opacity 300ms ease, visibility 0s linear 0s;
 }
@@ -6998,10 +7008,20 @@ button:not(.btn),
     max-height: min(60vh, 480px);
     overflow-y: auto;
     padding: var(--s-spacing-160);
-    border-radius: var(--s-border-radius-sm);
+    border-radius: var(--s-border-radius-xs);
     background: var(--c-surface-color-default-light-1);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
     scroll-behavior: smooth;
+}
+
+@supports (backdrop-filter: blur(18px)) or (-webkit-backdrop-filter: blur(18px)) {
+    .page-project-case-study .project-chapter-navigation__menu,
+    .page-project-case-study .project-chapter-navigation__current,
+    .page-project-case-study .project-chapter-navigation__top {
+        background: rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+    }
 }
 
 .page-project-case-study .project-chapter-navigation__menu[hidden] {
@@ -7036,7 +7056,7 @@ button:not(.btn),
 }
 
 .page-project-case-study .project-chapter-navigation__list a[aria-current="location"] {
-    border-radius: var(--s-border-radius-sm);
+    border-radius: var(--s-border-radius-xs);
     background-color: var(--c-surface-color-default-light-2);
 }
 

@@ -75,7 +75,7 @@
 </div>
 <div class="home-shell footer-bottom home-footer-bottom">
     <p class="copyright type-body-lg-regular">© 2026 / Zubin Charles</p>
-    <button class="scroll-to-top" aria-label="Scroll to top">
+    <button class="btn btn-primary scroll-to-top" type="button" aria-label="Scroll to top">
         <span class="icon-mask icon-chevron-up" aria-hidden="true"></span>
     </button>
 </div>
