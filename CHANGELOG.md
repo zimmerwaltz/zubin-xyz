@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1] — 9 November 2026
+
+### Fixed
+
+- Centered Visual Design section copy on tablet and mobile layouts across project pages.
+- Improved muted inline video autoplay and looping for the field-engineer case study, including Barba.js page transitions.
+
 ## [1.0.0] — 22 October 2026
 
 **Initial public release** 🚀
