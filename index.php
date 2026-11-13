@@ -73,25 +73,22 @@
                 </div>
                 <div class="home-my-work-visual" aria-hidden="true">
                     <div class="home-my-work-stack">
-                        <div class="home-my-work-layer home-my-work-layer-1">
-                            <img src="assets/images/home/project-card/project-1.png" alt="" loading="lazy">
-                        </div>
-                        <div class="home-my-work-layer home-my-work-layer-2">
-                            <img src="assets/images/home/project-card/project-2.png" alt="" loading="lazy">
-                        </div>
-                        <div class="home-my-work-layer home-my-work-layer-3">
-                            <img src="assets/images/home/project-card/project-3.png" alt="" loading="lazy">
-                        </div>
-                        <div class="home-my-work-layer home-my-work-layer-4">
-                            <img src="assets/images/home/project-card/project-4.png" alt="" loading="lazy">
-                        </div>
-                        <div class="home-my-work-layer home-my-work-layer-5">
-                            <img src="assets/images/home/project-card/project-5.png" alt="" loading="lazy">
-                        </div>
-                        <div class="home-my-work-layer home-my-work-layer-6">
-                            <img src="assets/images/home/project-card/project-6.png" alt="" loading="lazy">
-                        </div>
-
+                        <?php for ($card = 1; $card <= 6; $card++): ?>
+                            <?php
+                            $desktopImage = (($card - 1) % 4) + 1;
+                            $mobileImage = $card;
+                            $revealImage = 5 + (($card - 1) % 2);
+                            ?>
+                            <div class="home-my-work-layer home-my-work-layer-<?php echo $card; ?>">
+                                <div class="home-my-work-flip">
+                                    <picture class="home-my-work-face home-my-work-face-front">
+                                        <source media="(min-width: 1201px)" srcset="assets/images/home/project-card/project-<?php echo $desktopImage; ?>.png">
+                                        <img src="assets/images/home/project-card/project-<?php echo $mobileImage; ?>.png" alt="" loading="lazy">
+                                    </picture>
+                                    <img class="home-my-work-face home-my-work-face-back" src="assets/images/home/project-card/project-<?php echo $revealImage; ?>.png" alt="" loading="lazy">
+                                </div>
+                            </div>
+                        <?php endfor; ?>
                     </div>
                 </div>
             </div>

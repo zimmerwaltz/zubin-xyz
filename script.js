@@ -10,6 +10,7 @@ let activePageLoadProgress = null;
 let headerContrastFrame = 0;
 const projectChapterNavigationControllers = new WeakMap();
 const lazyImagePreloadObservers = new WeakMap();
+const myWorkRouletteControllers = new WeakMap();
 const LAZY_IMAGE_PRELOAD_SELECTOR = '[data-barba="container"]';
 
 const DARK_BACKGROUND_LUMINANCE_THRESHOLD = 0.179;
@@ -1004,19 +1005,19 @@ function initializeMyWorkStackScrollMotion(root = document) {
         return;
     }
 
-    const layers = Array.from(section.querySelectorAll('.home-my-work-layer'));
-    if (layers.length === 0) {
+    const stack = section.querySelector('.home-my-work-stack');
+    if (!stack) {
         section.dataset.stackMotionBound = 'true';
         return;
     }
 
-    const multipliers = [0.38, 0.62, 0.86, 1.12, 1.36, 1.6];
     const desktopMotion = window.matchMedia('(min-width: 1201px)');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let ticking = false;
 
     const update = () => {
-        if (!desktopMotion.matches) {
-            layers.forEach((layer) => layer.style.setProperty('--layer-offset-y', '0px'));
+        if (!desktopMotion.matches || reduceMotion.matches) {
+            stack.style.setProperty('--stack-offset-y', '0px');
             ticking = false;
             return;
         }
@@ -1027,11 +1028,8 @@ function initializeMyWorkStackScrollMotion(root = document) {
         const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
         const centered = Math.max(-0.5, Math.min(0.5, progress - 0.5));
 
-        layers.forEach((layer, index) => {
-            const multiplier = multipliers[index] ?? multipliers[multipliers.length - 1];
-            const offset = centered * 300 * multiplier;
-            layer.style.setProperty('--layer-offset-y', `${offset.toFixed(2)}px`);
-        });
+        const offset = centered * 300 * 0.38;
+        stack.style.setProperty('--stack-offset-y', `${offset.toFixed(2)}px`);
 
         ticking = false;
     };
@@ -1046,6 +1044,7 @@ function initializeMyWorkStackScrollMotion(root = document) {
 
     window.addEventListener('scroll', onScrollOrResize, { passive: true });
     window.addEventListener('resize', onScrollOrResize, { passive: true });
+    reduceMotion.addEventListener('change', onScrollOrResize);
     update();
 
     section.dataset.stackMotionBound = 'true';
@@ -1112,6 +1111,121 @@ function initializeMyWorkStackHoverDepth(root = document) {
         target.fill(0);
         start();
     });
+}
+
+function initializeMyWorkRoulette(root = document) {
+    const stack = root.querySelector('.home-my-work-stack');
+    if (!stack || myWorkRouletteControllers.has(stack)) {
+        return;
+    }
+
+    const card = stack.querySelector('.home-my-work-layer');
+    const front = card?.querySelector('.home-my-work-face-front source');
+    const back = card?.querySelector('.home-my-work-face-back');
+    if (!card || !front || !back) {
+        console.error('Unable to initialize the work roulette: a card face is missing.');
+        return;
+    }
+
+    const initialImage = front.getAttribute('srcset');
+    const imagePool = [...new Set(Array.from(
+        stack.querySelectorAll('.home-my-work-face-front img'),
+        (image) => image.getAttribute('src')
+    ))];
+    if (!initialImage || imagePool.some((image) => !image)
+        || !imagePool.includes(initialImage) || imagePool.length < 2) {
+        console.error('Unable to initialize the work roulette: the image pool is invalid.');
+        return;
+    }
+
+    const desktop = window.matchMedia('(min-width: 1201px)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const flipInterval = 2800;
+    const controller = new AbortController();
+    let visible = false;
+    let timer = null;
+    let visibleImage = initialImage;
+    let flipAngle = 0;
+    let imagesReady = false;
+    let imagesLoading = false;
+    let imageLoadFailed = false;
+
+    const stop = () => {
+        window.clearTimeout(timer);
+        timer = null;
+    };
+
+    const flipNext = () => {
+        const available = imagePool.filter((image) => image !== visibleImage);
+        const nextImage = available[Math.floor(Math.random() * available.length)];
+
+        if (card.classList.contains('is-flipped')) {
+            front.setAttribute('srcset', nextImage);
+        } else {
+            back.setAttribute('src', nextImage);
+        }
+        visibleImage = nextImage;
+        flipAngle += 180;
+        card.style.setProperty('--flip-angle', `${flipAngle}deg`);
+        card.classList.toggle('is-flipped');
+        timer = window.setTimeout(flipNext, flipInterval);
+    };
+
+    const update = () => {
+        if (!visible || !desktop.matches || reducedMotion.matches || document.hidden) {
+            stop();
+            if (reducedMotion.matches) {
+                card.classList.remove('is-flipped');
+                flipAngle = 0;
+                card.style.setProperty('--flip-angle', '0deg');
+                front.setAttribute('srcset', initialImage);
+                visibleImage = initialImage;
+            }
+        } else if (!imagesReady && !imagesLoading && !imageLoadFailed) {
+            imagesLoading = true;
+            Promise.all(imagePool.map((src) => {
+                const image = new Image();
+                image.src = src;
+                return image.decode();
+            })).then(() => {
+                imagesLoading = false;
+                imagesReady = true;
+                if (!controller.signal.aborted) {
+                    update();
+                }
+            }).catch((error) => {
+                imageLoadFailed = true;
+                console.error('Unable to load work roulette images.', error);
+            });
+        } else if (imagesReady && timer === null) {
+            timer = window.setTimeout(flipNext, flipInterval);
+        }
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        visible = entries[0].isIntersecting;
+        update();
+    }, { threshold: 0.1 });
+
+    observer.observe(stack);
+    desktop.addEventListener('change', update, { signal: controller.signal });
+    reducedMotion.addEventListener('change', update, { signal: controller.signal });
+    document.addEventListener('visibilitychange', update, { signal: controller.signal });
+
+    myWorkRouletteControllers.set(stack, { controller, observer, stop });
+}
+
+function destroyMyWorkRoulette(root) {
+    const stack = root.querySelector('.home-my-work-stack');
+    const roulette = stack && myWorkRouletteControllers.get(stack);
+    if (!roulette) {
+        return;
+    }
+
+    roulette.stop();
+    roulette.observer.disconnect();
+    roulette.controller.abort();
+    myWorkRouletteControllers.delete(stack);
 }
 
 function getViewportSize() {
@@ -1232,6 +1346,7 @@ function initializePageFeatures(container = document) {
     initializeMyWorkDotGrid(container);
     initializeMyWorkStackScrollMotion(container);
     initializeMyWorkStackHoverDepth(container);
+    initializeMyWorkRoulette(container);
     initializeMobileMenu(container);
     updateActiveNavOnScroll();
 }
@@ -1392,6 +1507,7 @@ function initializeBarba() {
     window.barba.hooks.beforeLeave((data) => {
         destroyProjectChapterNavigation(data.current.container);
         destroyLazyImagePreloading(data.current.container);
+        destroyMyWorkRoulette(data.current.container);
     });
 
     window.barba.hooks.after(() => {
